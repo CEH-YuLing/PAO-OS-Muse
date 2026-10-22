@@ -1,0 +1,12 @@
+{
+  "kind": "independent-muse-development-copy-v1",
+  "root": "G:\\PAO OS Muse",
+  "source_reference_only": "F:\\PAO-ACOS",
+  "api_port": 8200,
+  "web_port": 3300,
+  "postgres_port": 25432,
+  "redis_port": 26379,
+  "schema": "0077",
+  "compose_project": "pao-os-muse",
+  "production_accepted": false
+}

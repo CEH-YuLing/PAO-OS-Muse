@@ -1,0 +1,9 @@
+export type McpTool={id:string;name:string;hash:string;input_schema:Record<string,unknown>;output_schema:Record<string,unknown>};
+export type McpConnection={id:string;workspace_id:string;endpoint:string;status:'draft'|'connected'|'revoked';protocol:'2025-11-25';secret_present:boolean;version:number;permissions:string[];tools:McpTool[];manifest_hash:string|null;circuit_open:boolean};
+export function mcpEndpoint(value:string):string;
+export function mcpToken(value:string,required?:boolean):string;
+export function mcpRows(value:unknown,workspace:string):McpConnection[];
+export function mcpArguments(value:string):Record<string,unknown>;
+export function mcpDiscoveryRequest(id:string,version:number,nonce:string):{path:string;method:string;headers:Record<string,string>;body:string};
+export function mcpAudit(value:unknown):{id:string;action:string}[];
+export function mcpSettingsError(code:string):string;

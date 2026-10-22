@@ -1,0 +1,43 @@
+const assert=require('node:assert/strict'),{open}=require('./p6_browser_harness.cjs');let step='start';
+(async()=>{
+ const f=JSON.parse(process.env.PAO_CLOUD_SETTINGS_BROWSER),key='fixture-cloud-key-A-not-real',draft='fixture-cloud-unsaved-key-not-real';
+ let lost=true,hold=false,held=false,release;const pending=new Promise(resolve=>{release=resolve});const requests=[],nonces=[];
+ const h=await open(f,{intercept:async(route,response)=>{
+  const req=route.request(),url=new URL(req.url());if(url.pathname.startsWith('/v1/model-providers/')){
+   requests.push({method:req.method(),path:url.pathname});
+   if(url.pathname.endsWith('/connect')||url.pathname.endsWith('/models')||url.pathname.endsWith('/model')){
+    const nonce=req.headers()['idempotency-key'];assert.match(nonce||'',/^[0-9a-f-]{36}$/i);nonces.push(nonce);
+   }
+   if(url.pathname==='/v1/model-providers/openai/connect'&&lost){lost=false;assert.equal(response.status(),200);await route.abort('failed');return true}
+   if(url.pathname==='/v1/model-providers/openai/models'&&hold){hold=false;held=true;await pending;await route.fulfill({response});return true}
+  }
+  return false;
+ }}),p=h.page,panel=()=>p.getByLabel('Cài đặt mô hình đám mây',{exact:true}),card=provider=>panel().getByLabel('mô hình '+provider,{exact:true});
+ const consoleCategories=[];p.on('console',message=>{if(message.type()==='error'){const text=message.text(),react=/hydration|hydrated|unique.*key|Cannot update|rendering|uncontrolled|controlled input/i.test(text);consoleCategories.push(react?'react_error':/Failed to load resource|net::ERR_|status of (403|503)/i.test(text)?'expected_http_failure':'other_console_error');if(react)console.error('Browser route diagnostic '+JSON.stringify({console:'react_error',message:text.replaceAll(key,'[fixture-key]').replaceAll(draft,'[fixture-draft]').replaceAll('fixture-cloud-anthropic-not-real','[fixture-key]').replace(/[0-9a-f]{8}-[0-9a-f-]{27,}/gi,':id').slice(0,1000)}))}});
+ const advanced=async provider=>{const details=card(provider).locator('details.cm-advanced');if(await details.count()&&!(await details.evaluate(el=>el.open)))await details.locator('summary').click()};
+ const ack=async(provider,name)=>{await advanced(provider);await card(provider).getByLabel('Đồng ý thông tin mô tả '+name,{exact:true}).check()};
+ const click=(provider,name)=>card(provider).getByRole('button',{name,exact:true}).click();
+ const ready=async()=>{await p.getByTestId('model-connection-tab-api').click();await card('openai').getByRole('heading',{name:/OpenAI/}).waitFor();assert.equal(await panel().getByRole('button',{name:'Đọc lại trạng thái mô hình',exact:true}).isEnabled(),true)};
+ const read=async()=>{await panel().getByRole('button',{name:'Đọc lại trạng thái mô hình',exact:true}).click();await ready()};
+ const choose=async wid=>{if(p.viewportSize().width<1100){await p.getByLabel('Mở điều hướng',{exact:true}).click();await p.locator('.pao-sidebar-enterprise select').selectOption(wid)}else await p.locator('.pao-topbar-context select').selectOption(wid);await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-providers').click();await ready()};
+ const absentKeys=async()=>{const stored=await p.evaluate(()=>JSON.stringify({session:{...sessionStorage},local:{...localStorage}}));assert.ok(!stored.includes(key)&&!stored.includes(draft));assert.ok(!(await p.locator('body').innerText()).includes(key))};
+ try{
+  await h.login();await p.getByLabel('Doanh nghiệp đang hoạt động').selectOption(f.workspace);await p.goto(f.web+'/settings');await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-providers').click();await ready();
+  step='local validation clears key';await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).fill('too-short');await click('openai','Lưu cấu hình');await panel().getByRole('alert').waitFor();assert.equal(await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).inputValue(),'');assert.equal(requests.length,0);
+  step='committed connect with response lost';await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).fill(key);await click('openai','Lưu cấu hình');await panel().getByRole('alert').filter({hasText:'máy chủ có thể đã xử lý'}).waitFor();assert.equal(await card('openai').count(),0);assert.equal(requests.length,1);await absentKeys();
+  step='manual read, focus no auto catalogue';await read();assert.equal(await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).inputValue(),'');await advanced('openai');await card('openai').getByLabel('Mô hình lựa chọn OpenAI',{exact:true}).focus();assert.equal(requests.length,1);
+  step='explicit catalogue and staged selection';await ack('openai','OpenAI');await click('openai','Tải danh mục mô hình');await panel().getByRole('status').waitFor();
+  await card('openai').getByLabel('Mô hình lựa chọn OpenAI',{exact:true}).selectOption('fixture-second');assert.equal(requests.length,2);await ack('openai','OpenAI');await click('openai','Lưu mô hình đã chọn');await panel().getByRole('status').waitFor();assert.equal(requests.length,3);
+  step='probe consent';assert.equal(await card('openai').getByRole('button',{name:'Kiểm tra suy luận AI có phí',exact:true}).isDisabled(),true);await card('openai').getByLabel('Đồng ý suy luận AI OpenAI',{exact:true}).check();await click('openai','Kiểm tra suy luận AI có phí');await panel().getByRole('status').filter({hasText:'Lượt suy luận AI vừa phản hồi'}).waitFor();assert.equal(requests.length,4);
+  step='second provider default and disconnect';await card('anthropic').getByLabel('Khóa API Anthropic',{exact:true}).fill('fixture-cloud-anthropic-not-real');await click('anthropic','Lưu cấu hình');await panel().getByRole('status').waitFor();
+  await ack('anthropic','Anthropic');await click('anthropic','Đặt mặc định doanh nghiệp');await card('anthropic').getByText('Mặc định doanh nghiệp',{exact:true}).waitFor();
+  await click('anthropic','Xóa khóa');await panel().getByRole('status').filter({hasText:'Đã xóa khóa Anthropic'}).waitFor();assert.equal(requests.length,7);
+  step='mobile actual catalogue action';await p.setViewportSize({width:390,height:844});await ack('openai','OpenAI');await click('openai','Tải danh mục mô hình');await panel().getByRole('status').waitFor();await h.mobile();await absentKeys();
+  step='pending A catalogue then B';await ack('openai','OpenAI');hold=true;await click('openai','Tải danh mục mô hình');for(let i=0;i<100&&!held;i++)await new Promise(resolve=>setTimeout(resolve,20));assert.ok(held);await choose(f.second);release();await advanced('openai');assert.equal(await card('openai').getByLabel('Mô hình lựa chọn OpenAI',{exact:true}).inputValue(),'fixture-first');assert.equal(await card('openai').locator('select option').count(),1);
+  step='registered B legacy probe denied';await card('openai').getByLabel('Đồng ý suy luận AI OpenAI',{exact:true}).check();await click('openai','Kiểm tra suy luận AI có phí');await panel().getByRole('alert').filter({hasText:'lượt xử lý đúng phạm vi'}).waitFor();await read();
+  step='hidden-tab event clears draft';await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).fill(draft);await p.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));delete document.hidden});assert.equal(await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).inputValue(),'');
+  step='credential drafts do not cross SME/role';await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).fill(draft);await choose(f.employee);assert.equal(await panel().locator('input[type=password]').count(),0);assert.equal(await panel().getByRole('button').count(),1);await choose(f.second);assert.equal(await card('openai').getByLabel('Khóa API OpenAI',{exact:true}).inputValue(),'');await absentKeys();
+  assert.equal(new Set(nonces).size,nonces.length);assert.deepEqual(h.errors,[]);assert.ok(!consoleCategories.includes('react_error'),'React/hydration console error');assert.ok(!consoleCategories.includes('other_console_error'),'Unclassified console error');
+  console.log(JSON.stringify({pass:true,real_http:true,lost_response:true,no_auto_catalogue:true,explicit_probe:true,registered_denial:true,selection:true,default_disconnect:true,tenant_switch:true,mobile:true,credentials_cleared:true,late_response:true,console_categories:consoleCategories,real_provider_calls:false}));
+ }finally{release();await h.close()}
+})().catch(error=>{console.error('P6 browser failed at Cloud Settings '+step+' '+String(error.message).split('\n')[0].slice(0,180));process.exitCode=1});

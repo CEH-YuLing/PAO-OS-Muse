@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),{open}=require('./p6_browser_harness.cjs');let step='start';
+(async()=>{
+ const f=JSON.parse(process.env.PAO_HOST_SCOPE_BROWSER);let hold=false,held=false,release;const pending=new Promise(resolve=>{release=resolve});const writes=[];
+ const h=await open(f,{intercept:async(route,response)=>{const req=route.request(),url=new URL(req.url());if(req.method()!=='GET')writes.push(url.pathname);if(hold&&url.pathname==='/v1/integrations/meta/app-config'){hold=false;held=true;await pending;await route.fulfill({response});return true}return false}}),p=h.page,panel=()=>p.getByLabel('Cấu hình Meta App',{exact:true});
+ try{
+  await h.login();writes.length=0;await p.getByLabel('Doanh nghiệp đang hoạt động').selectOption(f.workspace);await p.goto(f.web+'/settings');await p.getByRole('button',{name:'Kết nối',exact:true}).click();await panel().getByRole('alert').filter({hasText:'Bản cài nhiều doanh nghiệp hoặc chủ doanh nghiệp'}).waitFor();assert.equal(await panel().locator('input[type=password]').count(),0);assert.equal(await panel().locator('form').count(),0);
+  step='old host GET result after role switch';hold=true;await panel().getByRole('button',{name:'Tải lại cấu hình',exact:true}).click();for(let i=0;i<100&&!held;i++)await new Promise(resolve=>setTimeout(resolve,20));assert.ok(held);await p.locator('.pao-topbar-context select').selectOption(f.second);await p.getByRole('button',{name:'Kết nối',exact:true}).click();release();assert.equal(await panel().count(),0);
+  step='return owner still denied';await p.locator('.pao-topbar-context select').selectOption(f.workspace);await p.getByRole('button',{name:'Kết nối',exact:true}).click();await panel().getByRole('alert').filter({hasText:'Bản cài nhiều doanh nghiệp hoặc chủ doanh nghiệp'}).waitFor();assert.equal(await panel().locator('input[type=password]').count(),0);assert.deepEqual(writes,[]);await h.mobile();assert.deepEqual(h.errors,[]);
+  console.log(JSON.stringify({pass:true,real_http:true,multi_sme_denied:true,late_response:true,role_switch:true,mobile:true,no_mutations:true,real_provider_calls:false}));
+ }finally{release();await h.close()}
+})().catch(error=>{console.error('P6 browser failed at Host Scope '+step+' '+String(error.message).split('\n')[0].slice(0,180));process.exitCode=1});

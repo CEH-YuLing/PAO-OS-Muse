@@ -1,0 +1,3 @@
+.st-readiness { display: grid; gap: 4px; margin-top: 8px; overflow-wrap: anywhere; }
+.st-readiness small { white-space: normal; line-height: 1.5; }
+.st-platform > p { font-size: 13px; line-height: 1.6; opacity: .8; }

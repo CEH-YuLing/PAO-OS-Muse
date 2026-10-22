@@ -1,0 +1,80 @@
+/* Shared semantic palette. Components must not assume a dark canvas. */
+:root,[data-theme="dark"]{
+ --pao-canvas:#06101b;--pao-surface:#0b1927;--pao-raised:#102333;--pao-inset:#07111c;--pao-hover:#173448;
+ --pao-text:#e5eff5;--pao-muted:#a4b9c7;--pao-faint:#8aa3b4;--pao-on-accent:#03151d;
+ --pao-border:#294658;--pao-border-strong:#456b80;--pao-accent:#57d7ef;--pao-accent-soft:#123444;
+ --pao-success:#75dfb2;--pao-success-soft:#123529;--pao-warning:#ffd080;--pao-warning-soft:#382b15;
+ --pao-danger:#ffaca0;--pao-danger-soft:#3b2229;--pao-purple:#cbb6ff;--pao-purple-soft:#2c2540;
+ --pao-shadow:0 12px 38px rgba(0,0,0,.22);color-scheme:dark;
+}
+[data-theme="light"]{
+ --pao-canvas:#f3f6fb;--pao-surface:#ffffff;--pao-raised:#f8fbfe;--pao-inset:#edf3f8;--pao-hover:#e6f0f7;
+ --pao-text:#142b3d;--pao-muted:#4b6375;--pao-faint:#5d7284;--pao-on-accent:#ffffff;
+ --pao-border:#ccd9e4;--pao-border-strong:#9cafbf;--pao-accent:#006c88;--pao-accent-soft:#e1f3f7;
+ --pao-success:#16724b;--pao-success-soft:#e8f6ed;--pao-warning:#8b5900;--pao-warning-soft:#fff4dc;
+ --pao-danger:#b42335;--pao-danger-soft:#fff0f1;--pao-purple:#6f43aa;--pao-purple-soft:#f3edff;
+ --pao-shadow:0 8px 30px rgba(32,63,87,.08);color-scheme:light;
+}
+html,body{background:var(--pao-canvas);color:var(--pao-text)}
+html{scroll-padding-top:92px}body{line-height:1.5}
+input,select,textarea{color-scheme:inherit}
+::selection{background:var(--pao-accent-soft);color:var(--pao-text)}
+.pao-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:8px 12px;border:1px solid var(--pao-border);border-radius:9px;background:var(--pao-surface);color:var(--pao-text);cursor:pointer;font:500 13px/1.3 system-ui,sans-serif;white-space:nowrap}
+.pao-theme-toggle:hover{background:var(--pao-hover);border-color:var(--pao-accent)}
+.pao-theme-toggle svg{color:var(--pao-accent);flex:none}
+.pao-theme-toggle:focus-visible,.pao-appearance button:focus-visible{outline:2px solid var(--pao-accent);outline-offset:3px}
+.pao-public-theme{position:fixed;right:20px;bottom:20px;z-index:80}
+.pao-appearance{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 20px;padding:20px 22px;background:var(--pao-surface);border:1px solid var(--pao-border);border-radius:12px;box-shadow:var(--pao-shadow)}
+.pao-appearance h2{margin:0 0 6px;font-size:17px}.pao-appearance p{max-width:660px;margin:0;color:var(--pao-muted);font-size:13px;line-height:1.6}
+.pao-appearance-options{display:flex;gap:10px;flex:none}.pao-appearance-options button{display:flex;align-items:center;gap:12px;min-width:130px;padding:13px;border:1px solid var(--pao-border);border-radius:10px;background:var(--pao-raised);color:var(--pao-text);text-align:left;cursor:pointer}
+.pao-appearance-options button[aria-pressed="true"]{border-color:var(--pao-accent);background:var(--pao-accent-soft);box-shadow:inset 0 0 0 1px var(--pao-accent)}
+.pao-appearance-options strong,.pao-appearance-options small{display:block}.pao-appearance-options small{font-size:11px;color:var(--pao-muted);max-width:145px;margin-top:3px}
+.pao-appearance .pao-appearance-current{margin-top:8px;font-size:12px;color:var(--pao-accent)}
+.pao-appearance-options svg{flex:none}
+.pao-observation-details{margin:10px 0 14px;color:var(--pao-muted);font-size:13px}.pao-observation-details summary{cursor:pointer;width:fit-content;padding:6px 0}
+.pao-system-details{border-bottom:1px solid var(--pao-border);background:var(--pao-raised)}
+.pao-system-details>summary{display:flex;align-items:center;gap:8px;width:fit-content;cursor:pointer;padding:8px 30px;font-size:12px;color:var(--pao-muted)}
+.pao-system-details>summary::before{content:'▸';color:var(--pao-accent)}.pao-system-details[open]>summary::before{content:'▾'}
+.pao-system-details>summary small{color:var(--pao-faint);font-size:11px}
+.pao-get-started{margin-bottom:22px;padding:20px;border:1px solid var(--pao-border);border-radius:12px;background:var(--pao-surface)}
+.pao-get-started h2{font-size:18px;margin:0 0 6px}.pao-get-started>p{margin:0 0 16px;color:var(--pao-muted);font-size:13px}
+.pao-start-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pao-start-links>a{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid var(--pao-border);border-radius:10px;background:var(--pao-raised);color:var(--pao-text);text-decoration:none}
+.pao-start-links>a:hover{background:var(--pao-accent-soft);border-color:var(--pao-accent)}
+.pao-start-links b{display:grid;place-items:center;width:28px;height:28px;flex:none;background:var(--pao-accent-soft);color:var(--pao-accent);border-radius:8px;font-size:13px}
+.pao-start-links strong,.pao-start-links small{display:block}.pao-start-links small{margin-top:5px;color:var(--pao-muted);font-size:12px;line-height:1.5}
+/* These overrides are intentionally rooted: preserve charts and custom visual stages. */
+html[data-theme] .pao-app{font-size:14px;line-height:1.5;background:var(--pao-canvas)}
+html[data-theme] .pao-app :is(input,select,textarea){font-size:13px;min-width:0}
+html[data-theme] .pao-app :is(button,input,select,textarea){line-height:1.45}
+html[data-theme] .pao-page-heading h1{font-size:28px;line-height:1.25;letter-spacing:-.025em}
+html[data-theme] .pao-page-heading p{font-size:14px;line-height:1.6;max-width:900px}
+html[data-theme] .pao-sidebar nav a{font-size:14px;min-height:43px;white-space:normal}
+html[data-theme] .pao-sidebar nav h2{font-size:11px;letter-spacing:.07em;margin-top:8px}
+html[data-theme] .pao-sidebar nav a small{display:none}
+html[data-theme] .pao-sidebar nav .pao-subviews a{font-size:12px;min-height:34px}
+html[data-theme] .pao-sidebar nav a[data-active="true"]{background:var(--pao-accent-soft);color:var(--pao-accent);border-color:var(--pao-border-strong)}
+html[data-theme] .pao-topbar-actions .pao-theme-toggle{display:inline-flex;width:36px;height:36px;padding:8px;border:1px solid var(--pao-border);background:var(--pao-surface)}
+html[data-theme] .pao-topbar-actions .pao-theme-toggle.is-compact span{display:none}
+html[data-theme] .pao-topbar-actions .pao-theme-toggle span{font-size:12px}
+html[data-theme="light"] .pao-sidebar{background:var(--pao-surface)}
+html[data-theme="light"] .pao-app :is(.pao-dashboard-intro,.pao-module-scaffold,.pao-page-ai,.pao-ask-bar){clip-path:none;border-radius:10px}
+html[data-theme="light"] .pao-app article{clip-path:none;border-radius:10px}
+html[data-theme="light"] .pao-copilot-launcher{box-shadow:var(--pao-shadow)}
+html[data-theme] .pao-app a{overflow-wrap:anywhere}
+html[data-theme] .pao-app table{font-size:12px}
+html[data-theme] .pao-app th{text-align:left}
+html[data-theme] .pao-ai-chat{grid-template-rows:auto minmax(0,1fr) auto}
+html[data-theme] .pao-ai-chat-header{flex-wrap:wrap;min-height:92px;padding:12px 16px;gap:8px}
+html[data-theme] .pao-ai-mode{order:3;flex-basis:100%;justify-content:flex-start;min-width:0;overflow-x:auto}
+@media(max-width:1100px){.pao-appearance{align-items:flex-start;flex-direction:column}.pao-start-links{grid-template-columns:1fr}}
+@media(max-width:760px){
+ html[data-theme] .pao-topbar-actions .pao-theme-toggle{display:inline-flex;width:36px;min-height:36px;padding:7px}
+ html[data-theme] .pao-topbar-actions .pao-theme-toggle span{display:none}
+ .pao-appearance{padding:16px;gap:16px}.pao-appearance-options{width:100%;flex-wrap:wrap}.pao-appearance-options button{flex:1;min-width:110px}
+ .pao-system-details>summary{padding:8px 15px}.pao-system-details>summary small{display:none}
+ .pao-public-theme{right:12px;bottom:12px}.pao-public-theme .pao-theme-toggle span{display:none}
+ html[data-theme] .pao-page-heading h1{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){html[data-theme] *,html[data-theme] *::before,html[data-theme] *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(max-width:520px){.pao-appearance-options{display:grid;grid-template-columns:minmax(0,1fr)}.pao-appearance-options button{min-width:0;width:100%}.pao-appearance-options small{max-width:none}}

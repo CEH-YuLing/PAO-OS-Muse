@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "approved_on": "2026-10-21",
+  "backup_root": "F:\\PAO-BOS Backup 001",
+  "checkpoint_subdirectory": "PAO-ACOS-Backups",
+  "layout": "{utc_timestamp}-{run_id}",
+  "source_root": "F:\\PAO-ACOS",
+  "local_staging_directory": ".runtime",
+  "mode": "operator_workflow",
+  "overwrite_existing_backups": false,
+  "automatic_deletion": false,
+  "github_upload": false,
+  "offsite_backup": false,
+  "private_configuration": "encrypted_separately_no_plaintext_secrets",
+  "existing_backups": "preserve_in_place"
+}

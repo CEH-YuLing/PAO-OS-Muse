@@ -1,0 +1,17 @@
+# TEMPLATE ONLY: do not activate before dedicated-host/security/owner approval.
+{
+    admin off
+}
+pao.example.invalid {
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy same-origin
+        X-Frame-Options DENY
+        -Server
+    }
+    @api path /v1/* /health /ready
+    reverse_proxy @api api:8000 {
+        flush_interval -1
+    }
+    reverse_proxy web:3000
+}

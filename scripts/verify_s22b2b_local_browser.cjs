@@ -1,0 +1,41 @@
+const assert=require('node:assert/strict');
+const {open}=require('./p6_browser_harness.cjs');let step='start';
+(async()=>{
+ const f=JSON.parse(process.env.PAO_S22B2B_LOCAL_BROWSER_FIXTURE),h=await open(f),p=h.page;
+ try{
+  await h.login();await p.getByLabel('Doanh nghiệp đang hoạt động').selectOption(f.workspace);
+  step='local chooser';await p.goto(f.web+'/pao-ai');await p.getByRole('button',{name:/^Local quota A/}).click();
+  const picker=p.locator('details[aria-label="Model hội thoại"]');await picker.locator('summary').click();
+  const select=picker.getByLabel('Model hội thoại',{exact:true});
+  await select.locator('option').filter({hasText:'Local · ollama · local-b'}).waitFor({state:'attached'});
+  await select.selectOption(JSON.stringify(['ollama','local-b',null]));
+  const selected=p.waitForResponse(r=>new URL(r.url()).pathname===`/v1/sessions/${f.session}/engine`&&r.request().method()==='PUT');
+  await picker.getByRole('button',{name:'Áp dụng model',exact:true}).click();const saved=await selected;
+  assert.equal(saved.status(),200);assert.equal(saved.headers()['cache-control'],'no-store');
+  assert.equal((await saved.json()).selection.model,'local-b');
+  await picker.locator('summary').filter({hasText:'local-b'}).waitFor();
+  step='reload';await p.reload();await p.getByRole('button',{name:/^Local quota A/}).click();
+  await picker.locator('summary').filter({hasText:'local-b'}).waitFor();
+  await picker.locator('summary').click();await select.locator('option').filter({hasText:'Local · ollama · local-a'}).waitFor({state:'attached'});
+  const token=await p.evaluate(()=>sessionStorage.getItem('pao.access_token')),headers={Authorization:'Bearer '+token};
+  const resource=wid=>f.api+`/v1/workspaces/${wid}/resources/metadata`;
+  const used=await (await p.request.get(resource(f.workspace),{headers})).json();assert.ok(used.usage.daily_requests>=2);
+  step='cap exhausted SME';const capped=await p.request.put(resource(f.workspace),{headers,data:{expected_version:used.metadata_policy.version,daily_metadata_requests:used.usage.daily_requests,concurrent_metadata:1}});
+  assert.equal(capped.status(),200);
+  const denied=await p.request.get(f.api+`/v1/engines?workspace_id=${f.workspace}`,{headers});
+  assert.equal(denied.status(),429);assert.equal((await denied.json()).detail,'tenant_metadata_daily_exhausted');
+  assert.equal(denied.headers()['cache-control'],'no-store');
+  step='quota error UI';await p.reload();await p.getByRole('button',{name:/^Local quota A/}).click();
+  await picker.locator('summary').filter({hasText:'local-b'}).waitFor();await picker.locator('summary').click();
+  await picker.getByRole('alert').filter({hasText:'tenant_metadata_daily_exhausted'}).waitFor();
+  assert.equal(await picker.getByRole('button',{name:'Áp dụng model',exact:true}).isDisabled(),true);
+  step='SME switch';await p.locator('.pao-topbar-context select').selectOption(f.second);
+  await p.getByRole('button',{name:/^Local quota B/}).click();
+  await picker.locator('summary').filter({hasText:'local-a'}).waitFor();await picker.locator('summary').click();
+  await select.locator('option').filter({hasText:'Local · ollama · local-b'}).waitFor({state:'attached'});
+  assert.equal(await picker.getByRole('alert').filter({hasText:'tenant_metadata_daily_exhausted'}).count(),0);
+  const b=await (await p.request.get(resource(f.second),{headers})).json();assert.equal(b.metadata_policy.version,0);assert.ok(b.usage.daily_requests>0);
+  step='mobile';await h.mobile();assert.deepEqual(h.errors,[]);
+  console.log(JSON.stringify({pass:true,real_http:true,local_selection:true,quota_denial:true,reload:true,tenant_switch:true,real_provider_calls:false}));
+ }finally{await h.close()}
+})().catch(e=>{console.error('P6 browser failed at S22b2b local '+step+' '+String(e.message).split('\n')[0].slice(0,180));process.exitCode=1});

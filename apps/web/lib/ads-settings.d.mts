@@ -1,0 +1,10 @@
+export type AdsProvider='meta'|'google';
+export type AdsConnection={configured:boolean;status:'connected'|'disconnected'|'expired';scopes:string[];remote_user_id?:string|null;expires_at?:string|null};
+export type AdsAccount={id:string;name:string;currency:string};
+export type AdsJob={id:string;kind:string;status:string;row_count:number};
+export const adsHelp:Record<AdsProvider,{name:string;base:string;url:string;text:string}>;
+export function adsStatus(provider:AdsProvider,value:unknown):AdsConnection;
+export function adsOAuthUrl(provider:AdsProvider,value:unknown,origin:string):string;
+export function adsAccounts(provider:AdsProvider,value:unknown):AdsAccount[];
+export function adsJobs(value:unknown):AdsJob[];
+export function adsSettingsError(code:string):string;

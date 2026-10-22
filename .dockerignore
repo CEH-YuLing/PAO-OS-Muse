@@ -1,0 +1,11 @@
+.git
+.venv
+**/node_modules
+**/.next
+**/.pao-next
+**/.next-pre-pao
+**/__pycache__
+**/*.egg-info
+.env*
+.runtime
+.pytest_cache

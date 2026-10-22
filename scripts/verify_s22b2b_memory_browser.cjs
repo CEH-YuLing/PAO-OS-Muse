@@ -1,0 +1,41 @@
+const assert=require('node:assert/strict');
+const {open}=require('./p6_browser_harness.cjs');let step='start';
+(async()=>{
+ const f=JSON.parse(process.env.PAO_MEMORY_EMBEDDING_BROWSER),h=await open(f),p=h.page;
+ try{
+  await h.login();await p.getByLabel('Doanh nghiệp đang hoạt động').selectOption(f.workspace);
+  await p.goto(f.web+'/pao-ai');await p.getByRole('button',{name:/^Embedding Memory A/}).click();
+  step='activity panel';await p.getByRole('button',{name:'Activity',exact:true}).click();
+  const panel=p.locator('details.pao-memory');await panel.locator('summary').click();
+  step='create';await panel.getByLabel('Khóa dữ kiện').fill('market');await panel.getByLabel('Dữ kiện',{exact:true}).fill('SME A sells in Malaysia.');
+  const created=p.waitForResponse(r=>new URL(r.url()).pathname==='/v1/memory'&&r.request().method()==='POST');
+  await panel.getByRole('button',{name:'Thêm bộ nhớ',exact:true}).click();const result=await created;assert.equal(result.status(),201);
+  const memory=await result.json();assert.ok(memory.embedding_model);
+  await panel.getByLabel('Danh sách bộ nhớ').getByText('SME A sells in Malaysia.',{exact:true}).waitFor();
+  step='edit';await panel.getByRole('button',{name:'Sửa',exact:true}).click();await panel.getByLabel('Dữ kiện',{exact:true}).fill('SME A targets Malaysia.');
+  const edited=p.waitForResponse(r=>new URL(r.url()).pathname===`/v1/memory/${memory.id}`&&r.request().method()==='PATCH');
+  await panel.getByRole('button',{name:'Lưu thay đổi',exact:true}).click();assert.equal((await edited).status(),200);
+  await panel.getByLabel('Danh sách bộ nhớ').getByText('SME A targets Malaysia.',{exact:true}).waitFor();
+  const token=await p.evaluate(()=>sessionStorage.getItem('pao.access_token')),headers={Authorization:'Bearer '+token};
+  const path=f.api+`/v1/workspaces/${f.workspace}/resources/models`;
+  const usage=await (await p.request.get(path,{headers})).json();assert.equal(usage.usage.calls,2);
+  assert.ok(usage.coverage.includes('memory_embeddings'));assert.ok(usage.coverage.includes('knowledge_embeddings'));assert.deepEqual(usage.pending_coverage,[]);
+  const capped=await p.request.put(path,{headers,data:{expected_version:usage.model_policy.version,daily_model_calls:2,daily_model_tokens:100000,concurrent_models:2}});
+  assert.equal(capped.status(),200);
+  step='quota lexical fallback';await panel.getByLabel('Tìm bộ nhớ').fill('Malaysia');
+  const search=p.waitForResponse(r=>new URL(r.url()).pathname==='/v1/memory/search');await panel.getByRole('button',{name:'Tìm kiếm',exact:true}).click();
+  const found=await search;assert.equal(found.status(),200);assert.equal((await found.json()).degraded,true);
+  await panel.getByText('Đang tìm theo từ khóa vì embedding chưa sẵn sàng.',{exact:true}).waitFor();
+  step='reload';await p.reload();await p.getByRole('button',{name:/^Embedding Memory A/}).click();await p.getByRole('button',{name:'Activity',exact:true}).click();await panel.locator('summary').click();
+  await panel.getByLabel('Danh sách bộ nhớ').getByText('SME A targets Malaysia.',{exact:true}).waitFor();
+  step='SME switch';await p.locator('.pao-topbar-context select').selectOption(f.second);
+  await p.getByRole('button',{name:/^Embedding Memory B/}).click();await p.getByRole('button',{name:'Activity',exact:true}).click();await panel.locator('summary').click();
+  assert.equal(await panel.getByText('SME A targets Malaysia.',{exact:true}).count(),0);
+  await panel.getByLabel('Khóa dữ kiện').fill('market');await panel.getByLabel('Dữ kiện',{exact:true}).fill('SME B targets Vietnam.');
+  const bCreated=p.waitForResponse(r=>new URL(r.url()).pathname==='/v1/memory'&&r.request().method()==='POST');
+  await panel.getByRole('button',{name:'Thêm bộ nhớ',exact:true}).click();const b=await bCreated;assert.equal(b.status(),201);assert.ok((await b.json()).embedding_model);
+  await panel.getByLabel('Danh sách bộ nhớ').getByText('SME B targets Vietnam.',{exact:true}).waitFor();
+  step='mobile';await h.mobile();assert.deepEqual(h.errors,[]);
+  console.log(JSON.stringify({pass:true,real_http:true,quota_fallback:true,reload:true,tenant_switch:true,real_provider_calls:false}));
+ }finally{await h.close()}
+})().catch(e=>{console.error('P6 browser failed at Memory embedding '+step+' '+String(e.message).split('\n')[0].slice(0,180));process.exitCode=1});

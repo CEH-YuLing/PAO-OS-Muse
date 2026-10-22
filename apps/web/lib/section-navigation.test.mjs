@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {sectionKey,sectionUrl,sectionValue} from './section-navigation.mjs';
+import {settingsGroups,settingsSections,settingsSection} from './settings-structure.mjs';
+import {readSettingsNavigation,settingsNavigationUrl} from './settings-navigation.mjs';
+test('seven settings groups have unique IDs and a concise hierarchy',()=>{assert.equal(settingsGroups.length,7);assert.equal(new Set(settingsGroups.map(x=>x.id)).size,7);for(const items of Object.values(settingsSections))assert.ok(items.length<=4)});
+test('settings summary is not the account/data editor',()=>{assert.equal(settingsSections.general,undefined);assert.ok(settingsSections.team.some(x=>x.id==='invitations'));assert.ok(settingsSections.safety.some(x=>x.id==='deletions'))});
+test('unknown section cannot select a prototype or external target',()=>{for(const value of ['__proto__','https://evil.test',null,''])assert.equal(settingsSection('team',value),'account')});
+test('legacy capabilities and platform links remain parseable',()=>{assert.equal(readSettingsNavigation('?tab=capabilities').tab,'capabilities');assert.equal(readSettingsNavigation('?tab=integrations&platform=zalo').platform,'plugins_messaging')});
+test('new team URL keeps enterprise scope and does not keep an obsolete platform',()=>{assert.equal(settingsNavigationUrl('http://localhost/settings?sme=a&platform=meta',{tab:'team',platform:'meta',section:'invitations'}),'/settings?sme=a&tab=team&section=invitations')});
+test('section reads only allowlisted presentation values',()=>{assert.equal(sectionValue('?view=jobs','view',['plan','jobs'],'plan'),'jobs');assert.equal(sectionValue('?view=run-all','view',['plan','jobs'],'plan'),'plan')});
+test('section links preserve enterprise, plan and brand selectors',()=>{assert.equal(sectionUrl('http://localhost/business-planning?sme=a&brand=b&plan=c','view','report'),'/business-planning?sme=a&brand=b&plan=c&view=report')});
+test('keyboard navigation wraps and handles home/end in both orientations',()=>{assert.equal(sectionKey('ArrowLeft',0,3),2);assert.equal(sectionKey('ArrowDown',2,3),0);assert.equal(sectionKey('Home',2,3),0);assert.equal(sectionKey('End',0,3),2)});
+test('invalid keyboard positions fail closed',()=>{for(const pair of [[0,0],[-1,3],[3,3],[0,NaN]])assert.equal(sectionKey('End',...pair),null);assert.equal(sectionKey('Enter',0,3),null)});

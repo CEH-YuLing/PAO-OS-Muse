@@ -1,0 +1,25 @@
+{
+  "name": "pao-local",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace apps/web --",
+    "build": "npm run build --workspace apps/web",
+    "start": "npm run start --workspace apps/web --",
+    "contracts": "openapi-typescript packages/contracts/openapi.json -o packages/contracts/schema.d.ts",
+    "test:runtime": "node --test apps/web/lib/runtime-state.test.mjs apps/web/lib/sse.test.mjs apps/web/lib/tenant-context.test.mjs apps/web/lib/tenant-transport.test.mjs",
+    "test:frontend": "node scripts/verify_workspace_ui.cjs",
+    "test:frontend:legacy": "node scripts/test_frontend_runtime.cjs"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "playwright": "1.62.1"
+  },
+  "overrides": {
+    "postcss": "8.5.30",
+    "sharp": "0.35.5",
+    "source-map-js": "1.2.2"
+  }
+}

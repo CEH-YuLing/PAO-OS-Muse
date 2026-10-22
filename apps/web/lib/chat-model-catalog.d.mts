@@ -1,0 +1,12 @@
+export type ChatModelSelection={provider:string;model:string;grant_id?:string;enterprise_source_id?:string;personal_cli_source_id?:string;installation_resource_id?:string;reasoning_effort?:string|null};
+export type ModelCapabilities={output_modalities:string[];chat_supported:boolean|null;evidence:string;adapter?:{image_generation:boolean;audio_generation:boolean}};
+export type ChatModelDetail={model:string;display_name:string;reasoning_efforts:string[];default_effort:string|null;model_capabilities?:ModelCapabilities};
+export type ChatModelOption={key:string;selection:ChatModelSelection;label:string;detail?:ChatModelDetail;origin:string;available:boolean};
+export const chatModelTabs:{id:string;label:string}[];
+export const chatModelProviders:{id:string;name:string;tab:string;planned?:boolean}[];
+export const chatEffortLabels:Record<string,string>;
+export function chatModelKey(value:ChatModelSelection):string;
+export function chatProviderName(provider:string):string;
+export function chatModelSummary(value:ChatModelSelection|null):string;
+export function chatModelOptions(catalog:{scope?:string;engines:{provider:string;models:string[];model_details?:ChatModelDetail[];local:boolean;error:string|null;enterprise_source_id?:string;personal_cli_source_id?:string;installation_resource_id?:string}[]}|null,grants:{items:{grant_id:string;provider:string;model:string}[]}|null,current:ChatModelSelection|null):ChatModelOption[];
+export function filterChatModels(options:ChatModelOption[],query:string,modality?:string):ChatModelOption[];

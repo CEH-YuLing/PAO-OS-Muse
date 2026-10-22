@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {telegramConnections,telegramTeam,pairingCommand,telegramError,telegramState} from './telegram-settings.mjs';
+const wid='11111111-1111-1111-1111-111111111111',cid='22222222-2222-2222-2222-222222222222';
+const row={id:cid,workspace_id:wid,bot_user_id:'123',kind:'native',generation:1,status:'disabled',mode:'polling',editable:true,identity_verified:true,live_accepted:false};
+const value={workspace_id:wid,runtime_available:false,can_manage:true,can_pair:true,connections:[row]};
+test('validated scoped snapshot never treats enabled as live acceptance',()=>{const r=telegramConnections(value,wid);assert.equal(r.connections[0].live_accepted,false);assert.equal(r.runtime_available,false)});
+for(const [field,bad] of [['workspace_id',cid],['generation',true],['status','healthy'],['mode','auto'],['live_accepted',true],['bot_user_id','@admin'],['editable','true']])test('malformed connection '+field,()=>assert.throws(()=>telegramConnections({...value,connections:[{...row,[field]:bad}]},wid)));
+test('cross tenant and duplicate IDs are rejected',()=>{assert.throws(()=>telegramConnections(value,cid));assert.throws(()=>telegramConnections({...value,connections:[row,row]},wid))});
+test('only projected metadata returns to views',()=>assert.equal(telegramConnections({...value,connections:[{...row,token:'PRIVATE'}]},wid).connections[0].token,undefined));
+test('one-time command is exact bounded and does not imply grant',()=>{assert.equal(pairingCommand({id:cid,command:'/start pao_'+'x'.repeat(32),expires_at:new Date().toISOString(),granted:false}),'/start pao_'+'x'.repeat(32));for(const command of ['https://malicious.invalid','/start pao_short'])assert.throws(()=>pairingCommand({id:cid,command,expires_at:new Date().toISOString(),granted:false}))});
+test('team snapshot preserves report-only versus chat capability',()=>{const r=telegramTeam({pairings:[],peers:[{id:cid,user_id:wid,telegram_user_id:'888',version:2,enabled:true,allow_chat:false,allow_reports:true}]});assert.equal(r.peers[0].allow_chat,false);assert.equal(r.peers[0].allow_reports,true)});
+test('provider exception text is not reflected',()=>{assert.ok(!telegramError('PRIVATE token').includes('PRIVATE'));assert.equal(telegramState('enabled'),'Đã bật xử lý');assert.equal(telegramState('new-untrusted'),'Chưa xác minh')});

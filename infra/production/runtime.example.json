@@ -1,0 +1,6 @@
+{
+  "DATABASE_URL": "postgresql+asyncpg://pao_app:REPLACE_URL_ENCODED@postgres:5432/pao_service_REPLACE",
+  "REDIS_URL": "redis://:REPLACE_URL_ENCODED@redis:6379/0",
+  "JWT_SECRET": "",
+  "INTEGRATION_ENCRYPTION_KEY": ""
+}

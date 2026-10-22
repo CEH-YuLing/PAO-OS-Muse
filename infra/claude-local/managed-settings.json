@@ -1,0 +1,8 @@
+{
+  "disableAllHooks": true,
+  "autoMemoryEnabled": false,
+  "enableAllProjectMcpServers": false,
+  "permissions": {
+    "deny": ["Bash", "Read", "Write", "Edit", "WebFetch", "WebSearch", "Task", "Agent", "Skill", "mcp__*"]
+  }
+}

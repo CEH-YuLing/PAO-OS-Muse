@@ -1,0 +1,19 @@
+{
+    admin off
+    auto_https disable_redirects
+}
+# PRIVATE LOCAL ACCEPTANCE ONLY. Internal CA is not a public production certificate.
+https://localhost:8443 {
+    tls internal
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy same-origin
+        X-Frame-Options DENY
+        -Server
+    }
+    @api path /v1/* /health /ready
+    reverse_proxy @api api:8000 {
+        flush_interval -1
+    }
+    reverse_proxy web:3000
+}

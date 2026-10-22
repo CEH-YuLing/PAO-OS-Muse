@@ -1,0 +1,11 @@
+export type CloudProvider='openai'|'anthropic'|'gemini'|'openrouter';
+export type CloudRecord={provider:CloudProvider;name:string;configured:boolean;status:string;is_default:boolean;model:string|null;model_count:number;last_checked_at:string|null;last_error:string|null;key_hint:string|null};
+export type ModelAction='connect'|'catalogue'|'select'|'default'|'probe'|'disconnect';
+export const modelHelp:Record<CloudProvider,{name:string;url:string;text:string}>;
+export function providerRows(value:unknown):CloudRecord[];
+export function modelKeyState(row:CloudRecord,draft?:string):{label:string;masked:string};
+export function modelSaveConsent(name:string,enterprise:string):string;
+export function cleanModelKey(value:string):string;
+export function modelIds(value:unknown,secret?:string):string[];
+export function modelRequest(provider:CloudProvider,action:ModelAction,workspace:string,body?:Record<string,unknown>,nonce?:string):{path:string;method:string;headers:Record<string,string>;body?:string};
+export function modelSettingsError(code:string):string;

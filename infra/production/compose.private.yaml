@@ -1,0 +1,110 @@
+# Private candidate only. Explicit secret paths and built release images required.
+name: pao-private
+x-runtime: &runtime
+  image: ${PAO_API_IMAGE:?Supply verified API image}
+  init: true
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  user: '10001:10001'
+  tmpfs: ['/tmp:rw,noexec,nosuid,size=64m,uid=10001,gid=10001']
+  volumes: ['runtime-data:/app/.runtime']
+  stop_grace_period: 210s
+  pids_limit: 128
+  mem_limit: 768m
+  logging: {driver: json-file, options: {max-size: '10m', max-file: '3'}}
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pao_admin
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_admin
+    secrets: [postgres_admin]
+    volumes: ['postgres-data:/var/lib/postgresql/data']
+    mem_limit: 768m
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U pao_admin -d postgres']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: [sh, -c, 'exec redis-server --appendonly yes --requirepass "$$(cat /run/secrets/redis_password)"']
+    secrets: [redis_password]
+    volumes: ['redis-data:/data']
+    mem_limit: 192m
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$(cat /run/secrets/redis_password)" redis-cli ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  migrate:
+    <<: *runtime
+    profiles: [operations]
+    restart: 'no'
+    command: [migrate]
+    secrets: [{source: migration_config, target: pao_config}]
+    depends_on: {postgres: {condition: service_healthy}}
+  grant:
+    <<: *runtime
+    profiles: [operations]
+    restart: 'no'
+    command: [grant]
+    secrets: [{source: migration_config, target: pao_config}]
+    depends_on: {postgres: {condition: service_healthy}}
+  api:
+    <<: *runtime
+    command: [api]
+    secrets: [{source: runtime_config, target: pao_config}]
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; assert urllib.request.urlopen("http://127.0.0.1:8000/ready",timeout=3).status==200']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    depends_on: {postgres: {condition: service_healthy}, redis: {condition: service_healthy}}
+  worker:
+    <<: *runtime
+    command: [worker]
+    secrets: [{source: runtime_config, target: pao_config}]
+    depends_on: {api: {condition: service_healthy}}
+  web:
+    image: ${PAO_WEB_IMAGE:?Supply verified web image}
+    init: true
+    restart: unless-stopped
+    read_only: true
+    user: '1000:1000'
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=32m,uid=1000,gid=1000', '/app/apps/web/.pao-build-check/cache:rw,noexec,nosuid,size=64m,uid=1000,gid=1000']
+    mem_limit: 512m
+    pids_limit: 128
+    stop_grace_period: 30s
+    logging: {driver: json-file, options: {max-size: '10m', max-file: '3'}}
+    depends_on: {api: {condition: service_healthy}}
+  proxy:
+    image: ${PAO_PROXY_IMAGE:?Supply verified proxy image}
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=16m,uid=1000,gid=1000']
+    restart: unless-stopped
+    ports: ['127.0.0.1:18443:8443']
+    volumes: ['./Caddyfile:/etc/caddy/Caddyfile:ro', 'caddy-data:/data', 'caddy-config:/config']
+    mem_limit: 128m
+    depends_on: [web]
+secrets:
+  postgres_admin: {file: '${PAO_POSTGRES_ADMIN_FILE:?Supply private admin password file}'}
+  redis_password: {file: '${PAO_REDIS_PASSWORD_FILE:?Supply private Redis password file}'}
+  runtime_config: {file: '${PAO_RUNTIME_CONFIG_FILE:?Supply private runtime JSON}'}
+  migration_config: {file: '${PAO_MIGRATION_CONFIG_FILE:?Supply private migration JSON}'}
+volumes:
+  postgres-data:
+  redis-data:
+  runtime-data:
+  caddy-data:
+  caddy-config:

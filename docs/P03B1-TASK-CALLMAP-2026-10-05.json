@@ -1,0 +1,577 @@
+{
+  "file": "apps/api/pao/task_api.py",
+  "lines": 870,
+  "sha256": "9bd12b7a5154bb8eed0c74bfd031429887dd60f8b3888ce510dda6429e9fcf82",
+  "functions": [
+    {
+      "name": "bounded_json",
+      "line": 50,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "ValueError",
+        "len"
+      ]
+    },
+    {
+      "name": "clean_criteria",
+      "line": 56,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "ValueError",
+        "any",
+        "len"
+      ]
+    },
+    {
+      "name": "project_in_workspace",
+      "line": 326,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "goal_in_workspace",
+      "line": 333,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "task_owned",
+      "line": 340,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "membership",
+        "str"
+      ]
+    },
+    {
+      "name": "validate_owner",
+      "line": 348,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "str"
+      ]
+    },
+    {
+      "name": "validate_run",
+      "line": 353,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "str"
+      ]
+    },
+    {
+      "name": "validate_dependencies",
+      "line": 361,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "len",
+        "list",
+        "select",
+        "set",
+        "str"
+      ]
+    },
+    {
+      "name": "sync_dependencies",
+      "line": 386,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "TaskDependency",
+        "delete"
+      ]
+    },
+    {
+      "name": "validate_parent",
+      "line": 394,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "len",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "ensure_dependencies_completed",
+      "line": 416,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "HTTPException",
+        "list",
+        "select"
+      ]
+    },
+    {
+      "name": "attempt_fingerprint",
+      "line": 430,
+      "routes": [],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "str"
+      ]
+    },
+    {
+      "name": "list_goals",
+      "line": 437,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/goals"
+        }
+      ],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "Depends",
+        "list",
+        "membership",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "create_goal",
+      "line": 447,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/v1/goals"
+        }
+      ],
+      "local_calls": [
+        "project_in_workspace",
+        "validate_owner"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "Goal",
+        "HTTPException",
+        "membership",
+        "str"
+      ]
+    },
+    {
+      "name": "get_goal",
+      "line": 466,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/goals/{goal_id}"
+        }
+      ],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "membership",
+        "str"
+      ]
+    },
+    {
+      "name": "update_goal",
+      "line": 475,
+      "routes": [
+        {
+          "method": "PATCH",
+          "path": "/v1/goals/{goal_id}"
+        }
+      ],
+      "local_calls": [
+        "validate_owner"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "any",
+        "getattr",
+        "list",
+        "membership",
+        "now",
+        "select",
+        "setattr",
+        "str"
+      ]
+    },
+    {
+      "name": "list_projects",
+      "line": 515,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/projects"
+        }
+      ],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "Depends",
+        "list",
+        "membership",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "create_project",
+      "line": 525,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/v1/projects"
+        }
+      ],
+      "local_calls": [
+        "validate_owner"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "Project",
+        "membership",
+        "str"
+      ]
+    },
+    {
+      "name": "update_project",
+      "line": 538,
+      "routes": [
+        {
+          "method": "PATCH",
+          "path": "/v1/projects/{project_id}"
+        }
+      ],
+      "local_calls": [
+        "validate_owner"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "getattr",
+        "membership",
+        "now",
+        "select",
+        "setattr",
+        "str"
+      ]
+    },
+    {
+      "name": "list_tasks",
+      "line": 562,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks"
+        }
+      ],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "Depends",
+        "Query",
+        "list",
+        "membership",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "create_task",
+      "line": 581,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/v1/tasks"
+        }
+      ],
+      "local_calls": [
+        "goal_in_workspace",
+        "project_in_workspace",
+        "sync_dependencies",
+        "validate_dependencies",
+        "validate_parent",
+        "validate_run"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "Task",
+        "TaskActivity",
+        "membership",
+        "now",
+        "str"
+      ]
+    },
+    {
+      "name": "get_task",
+      "line": 619,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks/{task_id}"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends"
+      ]
+    },
+    {
+      "name": "update_task",
+      "line": 624,
+      "routes": [
+        {
+          "method": "PATCH",
+          "path": "/v1/tasks/{task_id}"
+        }
+      ],
+      "local_calls": [
+        "goal_in_workspace",
+        "project_in_workspace",
+        "sync_dependencies",
+        "validate_dependencies",
+        "validate_parent",
+        "validate_run"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "TaskActivity",
+        "getattr",
+        "list",
+        "membership",
+        "now",
+        "select",
+        "setattr",
+        "str"
+      ]
+    },
+    {
+      "name": "list_attempts",
+      "line": 703,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks/{task_id}/attempts"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "list",
+        "select"
+      ]
+    },
+    {
+      "name": "create_attempt",
+      "line": 710,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/v1/tasks/{task_id}/attempts"
+        }
+      ],
+      "local_calls": [
+        "attempt_fingerprint",
+        "ensure_dependencies_completed",
+        "validate_run"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "TaskActivity",
+        "TaskAttempt",
+        "membership",
+        "now",
+        "select",
+        "snapshot",
+        "str",
+        "validate_input"
+      ]
+    },
+    {
+      "name": "update_attempt",
+      "line": 771,
+      "routes": [
+        {
+          "method": "PATCH",
+          "path": "/v1/tasks/{task_id}/attempts/{attempt_id}"
+        }
+      ],
+      "local_calls": [],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "TaskActivity",
+        "build_artifact",
+        "evaluate_result",
+        "max",
+        "membership",
+        "now",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "attempt_skill_replay",
+      "line": 830,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks/{task_id}/attempts/{attempt_id}/skill-replay"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "HTTPException",
+        "ValueError",
+        "read_artifact",
+        "select",
+        "str"
+      ]
+    },
+    {
+      "name": "list_comments",
+      "line": 849,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks/{task_id}/comments"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "list",
+        "select"
+      ]
+    },
+    {
+      "name": "create_comment",
+      "line": 855,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/v1/tasks/{task_id}/comments"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "TaskActivity",
+        "TaskComment"
+      ]
+    },
+    {
+      "name": "list_activity",
+      "line": 867,
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/v1/tasks/{task_id}/activity"
+        }
+      ],
+      "local_calls": [
+        "task_owned"
+      ],
+      "external_or_builtin_calls": [
+        "Depends",
+        "list",
+        "select"
+      ]
+    }
+  ],
+  "schemas": [
+    {
+      "name": "GoalCreate",
+      "line": 65
+    },
+    {
+      "name": "GoalPatch",
+      "line": 77
+    },
+    {
+      "name": "GoalOut",
+      "line": 89
+    },
+    {
+      "name": "ProjectCreate",
+      "line": 107
+    },
+    {
+      "name": "ProjectPatch",
+      "line": 116
+    },
+    {
+      "name": "ProjectOut",
+      "line": 125
+    },
+    {
+      "name": "TaskCreate",
+      "line": 140
+    },
+    {
+      "name": "TaskPatch",
+      "line": 181
+    },
+    {
+      "name": "TaskOut",
+      "line": 221
+    },
+    {
+      "name": "AttemptCreate",
+      "line": 255
+    },
+    {
+      "name": "AttemptPatch",
+      "line": 266
+    },
+    {
+      "name": "AttemptOut",
+      "line": 279
+    },
+    {
+      "name": "CommentCreate",
+      "line": 301
+    },
+    {
+      "name": "CommentOut",
+      "line": 305
+    },
+    {
+      "name": "ActivityOut",
+      "line": 315
+    }
+  ],
+  "direct_import_consumers": [],
+  "source_unchanged": true
+}

@@ -1,0 +1,21 @@
+.ux-section-tabs{display:flex;gap:6px;overflow-x:auto;max-width:100%;padding:5px;margin:14px 0 20px;border:1px solid var(--pao-border,#254455);border-radius:12px;background:var(--pao-surface,#0a1924)}
+.ux-section-tabs button{flex:0 0 auto;min-height:44px;display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding:11px 15px;border:1px solid transparent;border-radius:8px;color:inherit;background:transparent;text-align:left;cursor:pointer;font:inherit;white-space:normal}
+.ux-section-tabs button[aria-selected=true]{border-color:var(--pao-accent,#25d9ee);background:color-mix(in srgb,var(--pao-accent,#25d9ee) 9%,transparent)}
+.ux-section-tabs button small{font-size:11px;opacity:.75;font-weight:400;line-height:1.5}
+.ux-section-tabs button:focus-visible,.ux-action:focus-visible{outline:2px solid var(--pao-accent,#25d9ee);outline-offset:3px}
+.ux-section-panel{min-width:0;max-width:100%}.ux-section-panel[hidden],[hidden]{display:none!important}
+.ux-settings-layout{display:grid;grid-template-columns:215px minmax(0,1fr);gap:22px;align-items:start;margin-top:18px}
+.ux-settings-layout>.ux-section-rail{position:sticky;top:14px;display:flex;flex-direction:column;margin:0;overflow:visible}
+.ux-section-rail button{width:100%}.ux-settings-content{min-width:0;overflow-wrap:anywhere}
+.ux-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:12px;margin:18px 0}
+.ux-shortcuts a,.ux-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;min-height:44px;border:1px solid var(--pao-border,#254455);border-radius:9px;text-decoration:none;color:inherit;background:var(--pao-surface,#0a1924);font:inherit;cursor:pointer}
+.ux-shortcuts a{justify-content:flex-start}.ux-context-note{padding:13px 16px;border-left:3px solid var(--pao-accent,#25d9ee);background:color-mix(in srgb,var(--pao-accent,#25d9ee) 6%,transparent);line-height:1.7;margin:14px 0}
+.ux-editor{padding:20px;border:1px solid var(--pao-border,#254455);border-radius:12px;margin-top:18px;min-width:0}.ux-editor>header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.ux-editor h3{margin:0}
+.ux-view-switch{display:flex;gap:5px;flex-wrap:wrap}.ux-view-switch button[aria-pressed=true]{border-color:var(--pao-accent,#25d9ee)}
+html[data-theme=light] .ux-section-tabs,html[data-theme=light] .ux-action,html[data-theme=light] .ux-shortcuts a{background:#fff;border-color:#cbdbe9;color:#12394c}
+@media(max-width:1000px){.ux-settings-layout{grid-template-columns:175px minmax(0,1fr);gap:14px}}
+@media(max-width:760px){.ux-settings-layout{display:block}.ux-settings-layout>.ux-section-rail{position:static;flex-direction:row;overflow-x:auto;margin-bottom:16px}.ux-section-rail button{width:auto;min-width:140px}.ux-section-rail button small{display:none}.ux-section-tabs button{padding:10px 12px}.ux-editor{padding:12px}}
+
+
+.tasks-toolbar:has(#task-view-tab-work){display:block}.tasks-toolbar .ux-section-tabs{margin-bottom:10px}.tasks-toolbar .ux-view-switch{margin-bottom:12px}
+.cm-grid:has(>article:only-child){grid-template-columns:minmax(0,1fr)}

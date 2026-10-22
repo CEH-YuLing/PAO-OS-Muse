@@ -1,0 +1,14 @@
+/* Stable panel sizing and visible, independent scrollbars for long chats. */
+.pao-ai-layout{height:calc(100svh - 196px);min-height:520px;max-height:calc(100svh - 196px)}
+.pao-ai-conversations,.pao-ai-chat,.pao-ai-context{min-height:0}
+.pao-conversation-list,.pao-ai-messages,.pao-context-body{scrollbar-width:thin;scrollbar-color:var(--pao-accent) var(--pao-on-accent);overscroll-behavior:contain}
+.pao-conversation-list::-webkit-scrollbar,.pao-ai-messages::-webkit-scrollbar,.pao-context-body::-webkit-scrollbar{width:10px}
+.pao-conversation-list::-webkit-scrollbar-track,.pao-ai-messages::-webkit-scrollbar-track,.pao-context-body::-webkit-scrollbar-track{background:var(--pao-surface);border-left:1px solid var(--pao-border)}
+.pao-conversation-list::-webkit-scrollbar-thumb,.pao-ai-messages::-webkit-scrollbar-thumb,.pao-context-body::-webkit-scrollbar-thumb{background:linear-gradient(var(--pao-accent),var(--pao-accent));border:2px solid var(--pao-border);border-radius:999px}
+.pao-conversation-row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 29px;align-items:center;margin:2px 0;border:1px solid transparent;border-radius:6px}
+.pao-conversation-row:hover{background:var(--pao-raised)}.pao-conversation-row.active{border-color:var(--pao-accent);background:linear-gradient(90deg,var(--pao-accent-soft),transparent);color:var(--pao-text)}
+.pao-conversation-select{width:100%;min-width:0;display:grid;grid-template-columns:18px minmax(0,1fr) 14px;align-items:center;gap:8px;padding:10px 5px 10px 9px;border:0;background:transparent;color:var(--pao-muted);text-align:left;cursor:pointer}
+.pao-conversation-row.active .pao-conversation-select{color:var(--pao-text)}.pao-conversation-select>svg{color:var(--pao-accent)}.pao-conversation-select>span{min-width:0}
+.pao-conversation-delete{display:grid;place-items:center;width:25px;height:25px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--pao-faint);opacity:0;cursor:pointer;transition:.16s ease}
+.pao-conversation-row:hover .pao-conversation-delete,.pao-conversation-row:focus-within .pao-conversation-delete{opacity:1}.pao-conversation-delete:hover{border-color:var(--pao-border);background:var(--pao-raised);color:var(--pao-text)}.pao-conversation-delete:disabled{opacity:.25;cursor:not-allowed}
+@media(max-width:720px){.pao-ai-layout{height:calc(100svh - 176px);max-height:calc(100svh - 176px)}}

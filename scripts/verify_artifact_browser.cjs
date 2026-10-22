@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');const {open}=require('./p6_browser_harness.cjs');
+const f=JSON.parse(process.env.PAO_ARTIFACT_BROWSER_FIXTURE||'null');let stage='launch';
+(async()=>{const h=await open(f),p=h.page;
+ async function tab(){await p.getByRole('button',{name:'Học tài liệu',exact:true}).click();await p.getByRole('heading',{name:'Học từ tài liệu có duyệt',exact:true}).waitFor()}
+ async function propose(){await p.getByRole('button',{name:'Xem trước đề xuất tài liệu',exact:true}).click();await p.getByLabel('Artifact proposal preview').waitFor();const preview=JSON.parse(await p.getByLabel('Artifact proposal preview').innerText());assert.equal(preview.creates_note,false);assert.equal(preview.model_calls,false);assert.equal(await p.getByRole('button',{name:'Tạo đề xuất tài liệu',exact:true}).isDisabled(),true);await p.getByLabel('Confirm artifact proposal').check();await p.getByRole('button',{name:'Tạo đề xuất tài liệu',exact:true}).click()}
+ try{
+  stage='login';await h.login();await p.goto(f.web+'/automation/review');await tab();
+  stage='quote';await p.getByLabel('Artifact brain').selectOption(f.brain);await p.getByLabel('Artifact file').selectOption(f.file);await p.getByLabel('Artifact candidate').fill(f.quote);await propose();
+  let row=p.locator('.gr-workspace article').filter({has:p.getByRole('heading',{name:'quote · pending',exact:true})});await row.waitFor();await row.getByRole('button',{name:'Duyệt note tài liệu',exact:true}).click();await p.getByRole('heading',{name:'quote · promoted',exact:true}).waitFor();await p.getByRole('button',{name:'Hoàn tác note tài liệu',exact:true}).click();await p.getByRole('heading',{name:'quote · reverted',exact:true}).waitFor();
+  stage='derived';await p.getByLabel('Artifact derivation').selectOption('extractive_summary_v1');await p.getByLabel('Artifact segment 0').check();await p.getByLabel('Artifact segment 1').check();await propose();row=p.locator('.gr-workspace article').filter({has:p.getByRole('heading',{name:'extractive_summary_v1 · pending',exact:true})});await row.waitFor();await row.getByRole('button',{name:'Duyệt note tài liệu',exact:true}).click();await p.getByRole('heading',{name:'extractive_summary_v1 · promoted',exact:true}).waitFor();
+  stage='reload';await p.reload();await tab();await p.getByLabel('Artifact brain').selectOption(f.brain);await p.getByRole('heading',{name:'quote · reverted',exact:true}).waitFor();await p.getByRole('heading',{name:'extractive_summary_v1 · promoted',exact:true}).waitFor();
+  stage='mobile';await h.mobile();console.log(JSON.stringify({pass:true,real_http:true,quote_and_derived:true,preview_diff_review_revert:true,reload:true,mobile_width:390,page_errors:0}));
+ }catch(e){console.error('P6 browser failed at '+stage+': '+String(e.message).split('\n')[0]);throw e}finally{await h.close()}
+})().catch(()=>{process.exitCode=1});

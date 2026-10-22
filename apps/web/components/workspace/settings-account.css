@@ -1,0 +1,31 @@
+.st-workspace{min-width:0;padding-bottom:70px;overflow-wrap:anywhere;scroll-margin-top:90px}
+.st-account-team{margin-bottom:18px;padding:18px;border:1px solid var(--pao-border);background:var(--pao-surface);min-width:0}
+.st-account-team>header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.st-account-team h2{font-size:18px;margin:0 0 12px}.st-account-team h3{font-size:15px;margin:18px 0 8px}
+.st-account-team p{font-size:13px;line-height:1.65;color:var(--pao-text)}.st-account-team [role=alert]{color:var(--pao-text)}
+.st-account-team button{min-height:44px;padding:10px 12px;border:1px solid var(--pao-accent);background:var(--pao-inset);color:var(--pao-text);white-space:normal;max-width:100%;cursor:pointer}
+.st-account-team button:disabled{opacity:.5;cursor:wait}
+.st-account-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.st-account-grid>section{min-width:0}
+.st-account-team dl{margin:12px 0}.st-account-team dl>div{display:grid;grid-template-columns:minmax(100px,1fr) minmax(0,2fr);gap:12px;border-bottom:1px solid var(--pao-border);padding:10px 0;font-size:13px;line-height:1.6}
+.st-account-team dt{color:var(--pao-text)}.st-account-team dd{margin:0;color:var(--pao-text);overflow-wrap:anywhere}
+.st-account-team ul{list-style:none;padding:0;display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.st-account-team li{padding:12px;border:1px solid var(--pao-border);min-width:0;font-size:13px;line-height:1.6}
+.st-account-team li>*{display:block;overflow-wrap:anywhere}.st-account-team li small{color:var(--pao-text)}
+.st-workspace :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid var(--pao-accent);outline-offset:3px}
+.st-workspace :is(input,select,textarea,button,summary){scroll-margin:110px 0 100px}
+.st-workspace :is(.st-ai,.st-general,.st-system>div,.st-integrations){grid-template-columns:repeat(2,minmax(0,1fr))}
+.st-workspace :is(.st-ai>section,.st-command>div,.st-panel-head span,.st-agent-grid span,.st-system article span,.st-integrations article>div){min-width:0}
+.st-workspace .st-panel-head{height:auto;min-height:55px;padding-block:12px}.st-workspace .st-info strong{line-height:1.5;overflow-wrap:anywhere}
+@media(max-width:760px){
+ .st-account-grid,.st-account-team ul,.st-workspace :is(.st-ai,.st-general,.st-system>div,.st-integrations){grid-template-columns:minmax(0,1fr)}
+ .st-account-team{padding:14px}.st-account-team dl>div{grid-template-columns:minmax(0,1fr);gap:3px}
+ .st-workspace :is(.st-command button,.st-tabs button){min-height:44px}
+ .st-workspace .st-tabs{scrollbar-width:thin}.st-workspace .st-command>div{flex-wrap:wrap}
+ .st-workspace :is(.st-info,.st-summary-row){flex-wrap:wrap;gap:10px}
+ .st-workspace .st-summary-row strong{line-height:1.6;overflow-wrap:anywhere}
+ .st-workspace .st-integrations>article{grid-template-columns:30px minmax(0,1fr)}
+ .st-workspace .st-integrations article>span{grid-column:2;line-height:1.5}
+ .st-workspace :is(.st-health,.st-safety>header){flex-wrap:wrap}
+ .st-workspace :is(.st-message,.st-observed,.st-panel-head small,.st-summary-row span,.st-info,.st-integrations article p,.st-system article small){font-size:13px;line-height:1.6}
+ .st-workspace :is(.st-panel-head strong,.st-info strong,.st-summary-row strong){font-size:13px}
+}

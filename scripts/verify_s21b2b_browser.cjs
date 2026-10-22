@@ -1,0 +1,54 @@
+const assert=require('node:assert/strict');
+const {open}=require('./p6_browser_harness.cjs');
+let step='start';
+(async()=>{
+  const f=JSON.parse(process.env.PAO_S21B2B_BROWSER_FIXTURE),h=await open(f),p=h.page;
+  try{
+    await h.login();await p.getByLabel('Doanh nghiệp đang hoạt động').selectOption(f.workspace);
+    step='mapping UI';await p.goto(f.web+'/settings');
+    await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-access').click();
+    // Semantic section without explicit role may not be a region on all engines.
+    const access=p.locator('section[aria-label="Quyền dùng model"]');
+    await access.getByLabel('Kết nối cấp quyền').selectOption(f.source);
+    await access.getByLabel('Nhân viên được cấp mô hình').selectOption(f.actor);
+    const stageButton=access.getByRole('button',{name:'Lưu quyền chờ kích hoạt',exact:true});
+    assert.equal(await stageButton.isDisabled(),true);
+    await access.getByText('Tôi xác nhận doanh nghiệp, kết nối, thành viên, nhãn hàng và thời hạn; chỉ lưu mapping.',{exact:true}).click();
+    const stagedResponse=p.waitForResponse(r=>new URL(r.url()).pathname.endsWith('/connection-inventory/references')&&r.request().method()==='POST');
+    await stageButton.click();const staged=await stagedResponse;assert.equal(staged.status(),201);
+    const saved=await staged.json();
+    step='explicit activation';const activate=access.getByRole('button',{name:'Kích hoạt quyền này',exact:true});
+    await activate.waitFor();assert.equal(await activate.isDisabled(),true);
+    await access.getByLabel('Đồng ý kích hoạt mô hình suy luận AI').check();
+    const activated=p.waitForResponse(r=>new URL(r.url()).pathname.endsWith('/activate-model'));
+    await activate.click();assert.equal((await activated).status(),201);
+    await access.getByText('Đã ghi nhận đồng ý kích hoạt; quyền vẫn cần kiểm tra ở mỗi tác vụ',{exact:true}).waitFor();
+    await p.reload();await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-access').click();
+    await access.getByText('Đã ghi nhận đồng ý kích hoạt; quyền vẫn cần kiểm tra ở mỗi tác vụ',{exact:true}).waitFor();
+    step='tenant switch';await p.locator('.pao-topbar-context select').selectOption(f.second);
+    await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-access').click();
+    await access.getByRole('heading',{name:'Quyền dùng mô hình theo doanh nghiệp',exact:true}).waitFor();
+    await p.waitForTimeout(300);
+    assert.equal(await access.getByText('Đã ghi nhận đồng ý kích hoạt; quyền vẫn cần kiểm tra ở mỗi tác vụ',{exact:true}).count(),0);
+    await p.locator('.pao-topbar-context select').selectOption(f.workspace);
+    await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-access').click();
+    step='explicit grant engine selection';await p.goto(f.web+'/pao-ai');
+    await p.getByRole('button',{name:/^S21B2b mô hình quyền được cấp UI/}).click();
+    const picker=p.locator('details[aria-label="Model hội thoại"]');await picker.locator('summary').click();
+    const select=picker.getByLabel('mô hình hội thoại',{exact:true});
+    const chosen=JSON.stringify(['openai','local-fixture',saved.grant.id]);
+    await select.locator('option').filter({hasText:'Quyền đã cấp'}).waitFor({state:'attached'});
+    await select.selectOption(chosen);
+    const selected=p.waitForResponse(r=>new URL(r.url()).pathname===`/v1/sessions/${f.session}/engine`&&r.request().method()==='PUT');
+    await picker.getByRole('button',{name:'Áp dụng mô hình',exact:true}).click();
+    const result=await selected;assert.equal(result.status(),200);assert.equal((await result.json()).selection.grant_id,saved.grant.id);
+    step='revoke UI';await p.goto(f.web+'/settings');await p.getByTestId('settings-tab-ai').click();await p.getByTestId('settings-section-tab-access').click();
+    const revoked=p.waitForResponse(r=>new URL(r.url()).pathname.endsWith(`/grants/${saved.grant.id}/revoke`));
+    await access.getByRole('button',{name:'Thu hồi quyền này',exact:true}).click();assert.equal((await revoked).status(),200);
+    const token=await p.evaluate(()=>sessionStorage.getItem('pao.access_token'));
+    const catalog=await p.request.get(f.api+`/v1/workspaces/${f.workspace}/model-grants`,{headers:{Authorization:'Bearer '+token}});
+    assert.equal(catalog.status(),200);assert.deepEqual((await catalog.json()).items,[]);
+    step='mobile';await h.mobile();assert.deepEqual(h.errors,[]);
+    console.log(JSON.stringify({pass:true,real_http:true,explicit_consent:true,grant_selection:true,revoke_disappears:true,tenant_switch:true,provider_calls:false}));
+  }finally{await h.close()}
+})().catch(error=>{console.error('P6 browser failed at S21B2b '+step+' '+String(error.message).split('\n')[0].slice(0,180));process.exitCode=1});

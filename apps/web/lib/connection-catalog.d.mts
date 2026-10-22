@@ -1,0 +1,13 @@
+export type ConnectionGroupId='ads'|'bots'|'plugins'|'mcp';
+export type ConnectionGroup={id:ConnectionGroupId;name:string;description:string;defaultPlatform:string};
+export type ConnectionItem={id:string;group:ConnectionGroupId;name:string;hint:string;implemented:boolean};
+export type PluginApp={id:string;name:string;category:string};
+export const connectionGroups:ConnectionGroup[];
+export const connectionItems:ConnectionItem[];
+export const connectionPlatforms:string[];
+export const pluginApps:PluginApp[];
+export function normalizeConnectionPlatform(value:unknown):string;
+export function connectionItem(value:unknown):ConnectionItem;
+export function itemsInGroup(group:ConnectionGroupId):ConnectionItem[];
+export function appsInCategory(category:string):PluginApp[];
+export function tabTarget(key:string,index:number,length:number):number|null;

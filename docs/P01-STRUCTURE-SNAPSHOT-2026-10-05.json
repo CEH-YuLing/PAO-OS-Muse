@@ -1,0 +1,3439 @@
+{
+  "checkpoint": "P0.1",
+  "date": "2026-10-05",
+  "root": "F:/PAO-ACOS",
+  "git_head": "e1eb473",
+  "method": "Python AST and byte hashes only; no app imports, no endpoint calls",
+  "limits": [
+    "Imports include function-local imports; no dynamic-import resolution or runtime-cycle proof",
+    "Route comparison covers HTTP method and path, not request/response schema compatibility",
+    "ORM declarations are not live database inspection",
+    "Script classification is a usage recommendation, not proof of safety"
+  ],
+  "counts": {
+    "backend_python": 62,
+    "code_http_routes": 133,
+    "saved_openapi_http_routes": 133,
+    "declared_orm_tables": 64
+  },
+  "backend_files": [
+    {
+      "module": "pao.__init__",
+      "file": "apps/api/pao/__init__.py",
+      "lines": 1,
+      "sha256": "8a5aa8754b3429d22f919d3bfd784fca650ce0b5940d069813b377ee0d9f78b5",
+      "imports": []
+    },
+    {
+      "module": "pao.access",
+      "file": "apps/api/pao/access.py",
+      "lines": 29,
+      "sha256": "26e914d2b32529fadd9def5473db23e72f18c96020ce95707e37f03c3b2c2355",
+      "imports": [
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.ads_action_api",
+      "file": "apps/api/pao/ads_action_api.py",
+      "lines": 194,
+      "sha256": "e1cac6b3689b6cf2021fc7c59dbd74f27cbae678bee44085ffced5ccc215e50a",
+      "imports": [
+        "pao.ads_actions",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.ads_actions",
+      "file": "apps/api/pao/ads_actions.py",
+      "lines": 226,
+      "sha256": "18ddf53dc14e2a1590504736ea09eee454f9619d71a194b8666ac57fee1d37bb",
+      "imports": [
+        "pao.ads_policy",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.client",
+        "pao.integrations.meta.sync",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.ads_policy_api",
+      "file": "apps/api/pao/ads_policy_api.py",
+      "lines": 173,
+      "sha256": "95d8456794f0b608d18e8b32ca57a6862c7fc540013003ec16b65f084ee0c283",
+      "imports": [
+        "pao.access",
+        "pao.ads_policy",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.ads_policy",
+      "file": "apps/api/pao/ads_policy.py",
+      "lines": 95,
+      "sha256": "1e616a9cae1c9fc487fb36fc94a2178ec71931ea640c307add666ec13f127f6e",
+      "imports": [
+        "pao.config",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.agent_api",
+      "file": "apps/api/pao/agent_api.py",
+      "lines": 73,
+      "sha256": "d03b7cab0f55404831c5cff665ee1698c3816193a94d04d0ca545bf2c1ac077d",
+      "imports": [
+        "pao.access",
+        "pao.agents",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models",
+        "pao.schemas",
+        "pao.skill_artifacts",
+        "pao.tool_registry"
+      ]
+    },
+    {
+      "module": "pao.agents",
+      "file": "apps/api/pao/agents.py",
+      "lines": 90,
+      "sha256": "8c949d45f51f8a9187c1c1d33e219bc7b296760265c76960522390efd6ae2def",
+      "imports": [
+        "pao.config",
+        "pao.tool_registry"
+      ]
+    },
+    {
+      "module": "pao.attribution_api",
+      "file": "apps/api/pao/attribution_api.py",
+      "lines": 208,
+      "sha256": "e956382463636dfe29ab175df65c8639208414f8bb9fa8a3a26ed766d58460b2",
+      "imports": [
+        "pao.attribution",
+        "pao.auth",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.attribution",
+      "file": "apps/api/pao/attribution.py",
+      "lines": 112,
+      "sha256": "0c9c28c8cc2bc4c2d933d95e424350c94d6f467390674e72aa86cc4356be76fd",
+      "imports": [
+        "pao.models",
+        "pao.warehouse"
+      ]
+    },
+    {
+      "module": "pao.auth",
+      "file": "apps/api/pao/auth.py",
+      "lines": 54,
+      "sha256": "a1f2f6f47c86924bd727e5bae52f79011fcdc5c763f42b73111c2c04c7bd38a1",
+      "imports": [
+        "pao.config",
+        "pao.db",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.automation_api",
+      "file": "apps/api/pao/automation_api.py",
+      "lines": 143,
+      "sha256": "8cd049953d951163f8f5f4a868992297629bef16d5d945125a59f11cc5b7aa5f",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.automation_workflows",
+      "file": "apps/api/pao/automation_workflows.py",
+      "lines": 86,
+      "sha256": "a4f8060299d4ac4e3479b2cd5ea0d2bfe3c80e083da4b66eff5872fb4d31c3fa",
+      "imports": []
+    },
+    {
+      "module": "pao.automation",
+      "file": "apps/api/pao/automation.py",
+      "lines": 135,
+      "sha256": "53f03c9b445f15f7a740637106c30e3ecdb14ac8b8a0fe307900f47782f70f56",
+      "imports": [
+        "pao.automation_workflows",
+        "pao.config",
+        "pao.db",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.bootstrap",
+      "file": "apps/api/pao/bootstrap.py",
+      "lines": 34,
+      "sha256": "64ba5f87bfdb829a0645503a0d896e0869cc1ec1ec9d8f75c1d0ccfe20d20d4d",
+      "imports": [
+        "pao.auth",
+        "pao.db",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.business_tools",
+      "file": "apps/api/pao/business_tools.py",
+      "lines": 278,
+      "sha256": "d9858c0bf57aefc9c9647cdf9b08bbf3e72657a5a7c8a4af78d93ba895739fef",
+      "imports": [
+        "pao.access",
+        "pao.models",
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.config",
+      "file": "apps/api/pao/config.py",
+      "lines": 84,
+      "sha256": "fd0e1c7745e046c48dc1d2e149be6bd851db1d913c1b465b9680c59943a3f16c",
+      "imports": []
+    },
+    {
+      "module": "pao.creative_api",
+      "file": "apps/api/pao/creative_api.py",
+      "lines": 139,
+      "sha256": "ba4ada5838b7d377eef09b60d38ea914c6e44ae52c6fd15e1a16ec0e5b1b77d0",
+      "imports": [
+        "pao.auth",
+        "pao.creative_intelligence",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.creative_intelligence",
+      "file": "apps/api/pao/creative_intelligence.py",
+      "lines": 156,
+      "sha256": "b9488fc903b04072f989684fe8b7dd6b0a363195f082b92de82ae31a618f6929",
+      "imports": [
+        "pao.models",
+        "pao.warehouse"
+      ]
+    },
+    {
+      "module": "pao.db",
+      "file": "apps/api/pao/db.py",
+      "lines": 11,
+      "sha256": "9ef1379bd52a935d8e716fd8aac86fdfb4b857113a4778eb562755c04bc111d2",
+      "imports": [
+        "pao.config"
+      ]
+    },
+    {
+      "module": "pao.gateway",
+      "file": "apps/api/pao/gateway.py",
+      "lines": 279,
+      "sha256": "7ec3e667a426834ae6a3e03f761683be0c334c35c99ea2f7281f6d54a8e06957",
+      "imports": [
+        "pao.agents",
+        "pao.config",
+        "pao.memory_schemas"
+      ]
+    },
+    {
+      "module": "pao.integrations.__init__",
+      "file": "apps/api/pao/integrations/__init__.py",
+      "lines": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "imports": []
+    },
+    {
+      "module": "pao.integrations.google_ads.__init__",
+      "file": "apps/api/pao/integrations/google_ads/__init__.py",
+      "lines": 1,
+      "sha256": "5712fa31ef97632a5f79c53a28ec83b7ec1120604d3433eaf02247588c143cbd",
+      "imports": []
+    },
+    {
+      "module": "pao.integrations.google_ads.api",
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "lines": 97,
+      "sha256": "17b011ddab585411cc6ecb19f9b957816d154e72e19b55c3575381d5e28fe88e",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.google_ads.client",
+        "pao.integrations.google_ads.schemas",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.integrations.google_ads.client",
+      "file": "apps/api/pao/integrations/google_ads/client.py",
+      "lines": 91,
+      "sha256": "9d2acf3c03601ed120eb84ce94a0f9e3951524c3d0b10c9c66393973aa5b1354",
+      "imports": [
+        "pao.config"
+      ]
+    },
+    {
+      "module": "pao.integrations.google_ads.schemas",
+      "file": "apps/api/pao/integrations/google_ads/schemas.py",
+      "lines": 20,
+      "sha256": "34dec405be583a8d6bedb422be30bd0e8735078019e5810a8ac2e6b4aff87ae5",
+      "imports": []
+    },
+    {
+      "module": "pao.integrations.google_ads.sync",
+      "file": "apps/api/pao/integrations/google_ads/sync.py",
+      "lines": 50,
+      "sha256": "0892d3792929f3d69e7a3c741d5c0f5e7d064cc8ef5c05ad6dfd2becf3cb3ed4",
+      "imports": [
+        "pao.config",
+        "pao.db",
+        "pao.integrations.google_ads.client",
+        "pao.integrations.google_ads.warehouse",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.integrations.google_ads.warehouse",
+      "file": "apps/api/pao/integrations/google_ads/warehouse.py",
+      "lines": 76,
+      "sha256": "701888a70c19d8766a94011be9b94e1b9d554ad21d07fd25a5b59884bddad158",
+      "imports": [
+        "pao.integrations.google_ads.client",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.integrations.meta.__init__",
+      "file": "apps/api/pao/integrations/meta/__init__.py",
+      "lines": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "imports": []
+    },
+    {
+      "module": "pao.integrations.meta.api",
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "lines": 169,
+      "sha256": "21014b07b129c19e11d0f8cb46ea2a14c99ac3906822f7d416b06ea7e7d393ff",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.client",
+        "pao.integrations.meta.schemas",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.integrations.meta.client",
+      "file": "apps/api/pao/integrations/meta/client.py",
+      "lines": 189,
+      "sha256": "f8a5ed8b431bda7acd020bf7d61af40850bb08f6ae31edd8b270a4c1c28453e9",
+      "imports": [
+        "pao.config"
+      ]
+    },
+    {
+      "module": "pao.integrations.meta.schemas",
+      "file": "apps/api/pao/integrations/meta/schemas.py",
+      "lines": 62,
+      "sha256": "62441bac2e379ccaac01d069be5359aa9abff2adc2a66ea4e06e299efad861b6",
+      "imports": []
+    },
+    {
+      "module": "pao.integrations.meta.sync",
+      "file": "apps/api/pao/integrations/meta/sync.py",
+      "lines": 94,
+      "sha256": "bc6bb77ddafdea44e29f1b4b4dd2d74ce31e264c7175f3951d5a7905eecee4e6",
+      "imports": [
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.client",
+        "pao.models",
+        "pao.warehouse"
+      ]
+    },
+    {
+      "module": "pao.intelligence_api",
+      "file": "apps/api/pao/intelligence_api.py",
+      "lines": 244,
+      "sha256": "621f96d0f1b71c5baa4ee6e058a520fa9e2285bf9292fe2709b197312689beb8",
+      "imports": [
+        "pao.auth",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.intelligence",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.intelligence",
+      "file": "apps/api/pao/intelligence.py",
+      "lines": 257,
+      "sha256": "a79c832afab5c5294862cc4e5dc434a87368b27010d45fa0fda5d04bc824ee0f",
+      "imports": [
+        "pao.db",
+        "pao.models",
+        "pao.warehouse"
+      ]
+    },
+    {
+      "module": "pao.javis_compat",
+      "file": "apps/api/pao/javis_compat.py",
+      "lines": 83,
+      "sha256": "f5f8977ac8c6f61312a35cd64ec620743f59eb461f17458d285c0d4c8443dcd2",
+      "imports": []
+    },
+    {
+      "module": "pao.main",
+      "file": "apps/api/pao/main.py",
+      "lines": 255,
+      "sha256": "f9c5df061945a3efc92653661d07460d239d04df8bec53ad844810e41b803bc1",
+      "imports": [
+        "pao.access",
+        "pao.ads_action_api",
+        "pao.ads_policy_api",
+        "pao.agent_api",
+        "pao.attribution_api",
+        "pao.auth",
+        "pao.automation_api",
+        "pao.config",
+        "pao.creative_api",
+        "pao.db",
+        "pao.integrations.google_ads.api",
+        "pao.integrations.meta.api",
+        "pao.intelligence_api",
+        "pao.memory_api",
+        "pao.model_api",
+        "pao.models",
+        "pao.platform_api",
+        "pao.report_api",
+        "pao.runtime",
+        "pao.schemas",
+        "pao.skill_api",
+        "pao.task_api",
+        "pao.telegram",
+        "pao.tool_api",
+        "pao.voice_api",
+        "pao.warehouse_api"
+      ]
+    },
+    {
+      "module": "pao.memory_api",
+      "file": "apps/api/pao/memory_api.py",
+      "lines": 142,
+      "sha256": "9bc1087f894e40ea4886ee392e0a23652d268f7c6fcf52f7e9837a08b1de9e92",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.memory",
+        "pao.memory_schemas",
+        "pao.models",
+        "pao.schemas"
+      ]
+    },
+    {
+      "module": "pao.memory_schemas",
+      "file": "apps/api/pao/memory_schemas.py",
+      "lines": 82,
+      "sha256": "352e57144ed355d161b8b6ea09038d0e8a9a420a8e2560691e5ae414bee5084a",
+      "imports": [
+        "pao.schemas"
+      ]
+    },
+    {
+      "module": "pao.memory",
+      "file": "apps/api/pao/memory.py",
+      "lines": 169,
+      "sha256": "0acfd002d2d60a007dd717f9ba99d7c4c2ad93d23c621930cad54b20f48b8fce",
+      "imports": [
+        "pao.config",
+        "pao.db",
+        "pao.gateway",
+        "pao.memory_schemas",
+        "pao.model_router",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.model_api",
+      "file": "apps/api/pao/model_api.py",
+      "lines": 120,
+      "sha256": "b2c13bdd32e3ad0da389d5bec5ef694deb76c106d73889836f131988bf41a644",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.db",
+        "pao.gateway",
+        "pao.model_router",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.model_router",
+      "file": "apps/api/pao/model_router.py",
+      "lines": 73,
+      "sha256": "d7ec21f6ee288c5c47093496c3c9886d8c9142632e29c61b7b00479dbcf4ad03",
+      "imports": [
+        "pao.config",
+        "pao.gateway",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.models",
+      "file": "apps/api/pao/models.py",
+      "lines": 1224,
+      "sha256": "58ba4d6bb27610963b7d0b8f281782a79e1b61ce3a41c6069a6643cc7bc6abbd",
+      "imports": []
+    },
+    {
+      "module": "pao.platform_api",
+      "file": "apps/api/pao/platform_api.py",
+      "lines": 72,
+      "sha256": "163d9243784db6864dd6896576ca17c9398fabf1c28d21247e492e251d76f03a",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.javis_compat",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.reconciliation",
+      "file": "apps/api/pao/reconciliation.py",
+      "lines": 89,
+      "sha256": "150fc452e0abed0b8e5a8c014fcebe66d709f44bfdaab41e0d3aecf367c37974",
+      "imports": []
+    },
+    {
+      "module": "pao.report_api",
+      "file": "apps/api/pao/report_api.py",
+      "lines": 244,
+      "sha256": "5e01a182a3114233999e398025c3963ac402b79012f77852b323880d1657263e",
+      "imports": [
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.integrations.meta.sync",
+        "pao.models",
+        "pao.reconciliation",
+        "pao.reporting",
+        "pao.telegram"
+      ]
+    },
+    {
+      "module": "pao.reporting",
+      "file": "apps/api/pao/reporting.py",
+      "lines": 168,
+      "sha256": "8eed692108da329047b55d574ef92faf8cdc95d4462e5f556c1ff17b043fa118",
+      "imports": [
+        "pao.models",
+        "pao.warehouse"
+      ]
+    },
+    {
+      "module": "pao.runtime",
+      "file": "apps/api/pao/runtime.py",
+      "lines": 527,
+      "sha256": "9993c67c23f7e9c46529d7b66cd33432cf3e48cb786410fde5cb00489250be80",
+      "imports": [
+        "pao.ads_actions",
+        "pao.agents",
+        "pao.automation",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.google_ads.sync",
+        "pao.integrations.meta.sync",
+        "pao.intelligence",
+        "pao.javis_compat",
+        "pao.memory",
+        "pao.model_router",
+        "pao.models",
+        "pao.report_api",
+        "pao.skill_artifacts",
+        "pao.skill_router",
+        "pao.skills",
+        "pao.tool_gateway",
+        "pao.tool_registry",
+        "pao.warehouse_api"
+      ]
+    },
+    {
+      "module": "pao.schemas",
+      "file": "apps/api/pao/schemas.py",
+      "lines": 93,
+      "sha256": "9c8632e9ca9698a2ccca2bcd455dea161bef6a5d5bfaa3a01c42f2cad804e8fa",
+      "imports": []
+    },
+    {
+      "module": "pao.skill_api",
+      "file": "apps/api/pao/skill_api.py",
+      "lines": 160,
+      "sha256": "7eeba86e0e06d2052b808f0e62444ed8de0281afff126c54990491ddcc6ead7f",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.business_tools",
+        "pao.db",
+        "pao.models",
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.skill_artifacts",
+      "file": "apps/api/pao/skill_artifacts.py",
+      "lines": 105,
+      "sha256": "a9ea402fa7c34609521891b75df053f19aaef57540800949c77f6fa7dfa528a8",
+      "imports": [
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.skill_router",
+      "file": "apps/api/pao/skill_router.py",
+      "lines": 98,
+      "sha256": "89806a7065ff84b72b94042081de18828960878cac20d4348a84ea3371fe2e3d",
+      "imports": [
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.skills",
+      "file": "apps/api/pao/skills.py",
+      "lines": 153,
+      "sha256": "294c8a94b80614d3dae1fd2af9574c0fb896de66172483e8bece8dff44a6f1de",
+      "imports": [
+        "pao.config"
+      ]
+    },
+    {
+      "module": "pao.task_api",
+      "file": "apps/api/pao/task_api.py",
+      "lines": 870,
+      "sha256": "9bd12b7a5154bb8eed0c74bfd031429887dd60f8b3888ce510dda6429e9fcf82",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.db",
+        "pao.models",
+        "pao.skill_artifacts",
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.telegram",
+      "file": "apps/api/pao/telegram.py",
+      "lines": 304,
+      "sha256": "2c49d8b513c5e8d9db6704bcb63313ffe2f121504eb0893731467963440e81c1",
+      "imports": [
+        "pao.ads_actions",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models",
+        "pao.tool_gateway"
+      ]
+    },
+    {
+      "module": "pao.tool_api",
+      "file": "apps/api/pao/tool_api.py",
+      "lines": 89,
+      "sha256": "9496d7f61e5b68aa8be45ea1783b509853002651c849ace564143db89208ff2e",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models",
+        "pao.schemas",
+        "pao.tool_gateway",
+        "pao.tool_registry"
+      ]
+    },
+    {
+      "module": "pao.tool_gateway",
+      "file": "apps/api/pao/tool_gateway.py",
+      "lines": 224,
+      "sha256": "29080a026fc75082ff68672c6171d4e354ec0cd25b22b66cceaf8658b5d7ae37",
+      "imports": [
+        "pao.auth",
+        "pao.business_tools",
+        "pao.config",
+        "pao.db",
+        "pao.models",
+        "pao.skills",
+        "pao.tool_registry"
+      ]
+    },
+    {
+      "module": "pao.tool_registry",
+      "file": "apps/api/pao/tool_registry.py",
+      "lines": 74,
+      "sha256": "be5cd3eddc2e3d4221b0ace45c5e8d8500132939628f4aa95bd4e8a148c4dc19",
+      "imports": [
+        "pao.skills"
+      ]
+    },
+    {
+      "module": "pao.voice_api",
+      "file": "apps/api/pao/voice_api.py",
+      "lines": 57,
+      "sha256": "0b435f69c848837c1be5b3b89130328d62d7e6c938199c15abb0dd8a943da4cc",
+      "imports": [
+        "pao.access",
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.models",
+        "pao.voice"
+      ]
+    },
+    {
+      "module": "pao.voice",
+      "file": "apps/api/pao/voice.py",
+      "lines": 60,
+      "sha256": "bd71edff31712b55baafd0fb5441ff5c9b243ab024501026353f2539475a1b50",
+      "imports": [
+        "pao.config"
+      ]
+    },
+    {
+      "module": "pao.warehouse_api",
+      "file": "apps/api/pao/warehouse_api.py",
+      "lines": 173,
+      "sha256": "6a96427c122b4c28920f63e51ee7a8a92c6f407daf176f2f34ec54be2e2fc9d6",
+      "imports": [
+        "pao.auth",
+        "pao.config",
+        "pao.db",
+        "pao.integrations.meta.api",
+        "pao.integrations.meta.sync",
+        "pao.models"
+      ]
+    },
+    {
+      "module": "pao.warehouse",
+      "file": "apps/api/pao/warehouse.py",
+      "lines": 131,
+      "sha256": "5a4a3cff7883a07b2f750f769cd08c67f5fe2e02ca17759a43baec2200caea1b",
+      "imports": [
+        "pao.integrations.meta.client",
+        "pao.models"
+      ]
+    }
+  ],
+  "router_registration": [
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 210,
+      "call": "app.include_router(memory_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 212,
+      "call": "app.include_router(agent_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 214,
+      "call": "app.include_router(tool_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 216,
+      "call": "app.include_router(telegram_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 218,
+      "call": "app.include_router(meta_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 220,
+      "call": "app.include_router(google_ads_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 222,
+      "call": "app.include_router(warehouse_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 234,
+      "call": "app.include_router(report_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 235,
+      "call": "app.include_router(intelligence_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 236,
+      "call": "app.include_router(ads_action_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 237,
+      "call": "app.include_router(approval_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 238,
+      "call": "app.include_router(ads_policy_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 239,
+      "call": "app.include_router(creative_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 240,
+      "call": "app.include_router(attribution_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 241,
+      "call": "app.include_router(automation_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 242,
+      "call": "app.include_router(voice_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 243,
+      "call": "app.include_router(task_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 244,
+      "call": "app.include_router(platform_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 245,
+      "call": "app.include_router(model_router)"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 247,
+      "call": "app.include_router(skill_router)"
+    }
+  ],
+  "routes": [
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 34,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/health",
+      "handler": "health"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 39,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/ready",
+      "handler": "ready"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 135,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/actions",
+      "handler": "actions"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 127,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/actions",
+      "handler": "propose"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 145,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/actions/{action_id}",
+      "handler": "get_action"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 153,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/actions/{action_id}/execute",
+      "handler": "execute"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 214,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/anomalies",
+      "handler": "anomalies"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 224,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/anomalies/{anomaly_id}/acknowledge",
+      "handler": "acknowledge"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 105,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/autopilot/policies",
+      "handler": "policies"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 120,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/ads/autopilot/policies",
+      "handler": "put_policy"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 112,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/autopilot/policies/{policy_id}",
+      "handler": "get_policy"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 167,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/autopilot/policies/{policy_id}/freeze",
+      "handler": "freeze"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 172,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/autopilot/policies/{policy_id}/unfreeze",
+      "handler": "unfreeze"
+    },
+    {
+      "file": "apps/api/pao/ads_policy_api.py",
+      "line": 90,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/autopilot/status",
+      "handler": "runtime_status"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 193,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/intelligence/analyze",
+      "handler": "analyze_now"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 231,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/recommendations",
+      "handler": "recommendations"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 241,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/ads/recommendations/{recommendation_id}/dismiss",
+      "handler": "dismiss"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 177,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/rules",
+      "handler": "rules"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 185,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/ads/rules/{rule_id}",
+      "handler": "set_rule"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 155,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/targets",
+      "handler": "targets"
+    },
+    {
+      "file": "apps/api/pao/intelligence_api.py",
+      "line": 162,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/ads/targets",
+      "handler": "set_target"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 122,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/ads/write-status",
+      "handler": "write_status"
+    },
+    {
+      "file": "apps/api/pao/agent_api.py",
+      "line": 63,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/agents",
+      "handler": "registry"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 165,
+      "receiver": "approval_router",
+      "method": "GET",
+      "path": "/v1/approvals",
+      "handler": "approvals"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 174,
+      "receiver": "approval_router",
+      "method": "GET",
+      "path": "/v1/approvals/{action_id}",
+      "handler": "approval_detail"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 188,
+      "receiver": "approval_router",
+      "method": "POST",
+      "path": "/v1/approvals/{action_id}/approve",
+      "handler": "approve"
+    },
+    {
+      "file": "apps/api/pao/ads_action_api.py",
+      "line": 193,
+      "receiver": "approval_router",
+      "method": "POST",
+      "path": "/v1/approvals/{action_id}/reject",
+      "handler": "reject"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 205,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/alerts/{alert_id}/acknowledge",
+      "handler": "acknowledge"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 186,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/analyze",
+      "handler": "analyze_now"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 201,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/attribution/dashboard",
+      "handler": "dashboard"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 119,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/attribution/sources",
+      "handler": "sources"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 109,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/sources",
+      "handler": "create_source"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 125,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/analytics",
+      "handler": "import_analytics"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 137,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/leads",
+      "handler": "import_leads"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 164,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/orders",
+      "handler": "import_orders"
+    },
+    {
+      "file": "apps/api/pao/attribution_api.py",
+      "line": 149,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/stages",
+      "handler": "import_stages"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 50,
+      "receiver": "app",
+      "method": "POST",
+      "path": "/v1/auth/token",
+      "handler": "login"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 72,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/automation/status",
+      "handler": "status"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 116,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/automation/workflows",
+      "handler": "listing"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 77,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/automation/workflows",
+      "handler": "start"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 121,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/automation/workflows/{workflow_id}",
+      "handler": "get"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 137,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/automation/workflows/{workflow_id}/cancel",
+      "handler": "cancel"
+    },
+    {
+      "file": "apps/api/pao/automation_api.py",
+      "line": 124,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/automation/workflows/{workflow_id}/decision",
+      "handler": "decision"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 35,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/brands",
+      "handler": "brands"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 41,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/brands",
+      "handler": "create_brand"
+    },
+    {
+      "file": "apps/api/pao/creative_api.py",
+      "line": 104,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/creatives/analyze",
+      "handler": "analyze_now"
+    },
+    {
+      "file": "apps/api/pao/creative_api.py",
+      "line": 127,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/creatives/assets/{asset_id}/metadata",
+      "handler": "update_metadata"
+    },
+    {
+      "file": "apps/api/pao/creative_api.py",
+      "line": 122,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/creatives/dashboard",
+      "handler": "dashboard"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 437,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/goals",
+      "handler": "list_goals"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 447,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/goals",
+      "handler": "create_goal"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 466,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/goals/{goal_id}",
+      "handler": "get_goal"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 475,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/goals/{goal_id}",
+      "handler": "update_goal"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 84,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/accounts",
+      "handler": "accounts"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 53,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/callback",
+      "handler": "callback"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 66,
+      "receiver": "router",
+      "method": "DELETE",
+      "path": "/v1/integrations/google-ads/connection",
+      "handler": "disconnect"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 39,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/connection",
+      "handler": "status"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 81,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/jobs",
+      "handler": "jobs"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 93,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/metrics",
+      "handler": "metrics"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 45,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/integrations/google-ads/oauth/start",
+      "handler": "start"
+    },
+    {
+      "file": "apps/api/pao/integrations/google_ads/api.py",
+      "line": 70,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/integrations/google-ads/sync",
+      "handler": "sync"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 87,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/meta/callback",
+      "handler": "callback"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 118,
+      "receiver": "router",
+      "method": "DELETE",
+      "path": "/v1/integrations/meta/connection",
+      "handler": "disconnect"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 55,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/meta/connection",
+      "handler": "status"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 152,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/meta/jobs",
+      "handler": "jobs"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 66,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/integrations/meta/oauth/start",
+      "handler": "start"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 159,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/integrations/meta/snapshots",
+      "handler": "snapshots"
+    },
+    {
+      "file": "apps/api/pao/integrations/meta/api.py",
+      "line": 128,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/integrations/meta/sync",
+      "handler": "sync"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 63,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/v1/me",
+      "handler": "me"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 73,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/memory",
+      "handler": "list_memory"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 82,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/memory",
+      "handler": "create_memory"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 132,
+      "receiver": "router",
+      "method": "DELETE",
+      "path": "/v1/memory/{memory_id}",
+      "handler": "delete_memory"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 106,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/memory/{memory_id}",
+      "handler": "edit_memory"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 96,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/memory/search",
+      "handler": "search_memory"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 62,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/memory/status",
+      "handler": "memory_status"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 51,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/model-providers",
+      "handler": "listing"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 117,
+      "receiver": "router",
+      "method": "DELETE",
+      "path": "/v1/model-providers/{provider}",
+      "handler": "disconnect"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 57,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/connect",
+      "handler": "connect"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 95,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/default",
+      "handler": "set_default"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 86,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/model-providers/{provider}/model",
+      "handler": "set_model"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 76,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/model-providers/{provider}/models",
+      "handler": "models"
+    },
+    {
+      "file": "apps/api/pao/model_api.py",
+      "line": 103,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/test",
+      "handler": "test"
+    },
+    {
+      "file": "apps/api/pao/platform_api.py",
+      "line": 23,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/platform/catalog",
+      "handler": "catalog"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 515,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/projects",
+      "handler": "list_projects"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 525,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/projects",
+      "handler": "create_project"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 538,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/projects/{project_id}",
+      "handler": "update_project"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 143,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/reports",
+      "handler": "reports"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 124,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/reports",
+      "handler": "create"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 169,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/reports/{report_id}",
+      "handler": "get_report"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 110,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/reports/{report_id}/reconciliation-preview",
+      "handler": "reconciliation_preview"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 174,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/reports/{report_id}/telegram",
+      "handler": "send_telegram"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 185,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/reports/configuration/schedules",
+      "handler": "schedules"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 193,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/reports/configuration/schedules",
+      "handler": "set_schedule"
+    },
+    {
+      "file": "apps/api/pao/report_api.py",
+      "line": 154,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/reports/dashboard",
+      "handler": "dashboard"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 120,
+      "receiver": "app",
+      "method": "POST",
+      "path": "/v1/runs",
+      "handler": "create_run"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 150,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/v1/runs/{run_id}",
+      "handler": "get_run"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 155,
+      "receiver": "app",
+      "method": "POST",
+      "path": "/v1/runs/{run_id}/cancel",
+      "handler": "cancel"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 167,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/events",
+      "handler": "events"
+    },
+    {
+      "file": "apps/api/pao/agent_api.py",
+      "line": 70,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/execution",
+      "handler": "execution"
+    },
+    {
+      "file": "apps/api/pao/agent_api.py",
+      "line": 48,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/skill-replay",
+      "handler": "skill_replay"
+    },
+    {
+      "file": "apps/api/pao/tool_api.py",
+      "line": 72,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/tools",
+      "handler": "snapshot"
+    },
+    {
+      "file": "apps/api/pao/tool_api.py",
+      "line": 80,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/runs/{run_id}/tools",
+      "handler": "create"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 86,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/v1/sessions",
+      "handler": "list_sessions"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 70,
+      "receiver": "app",
+      "method": "POST",
+      "path": "/v1/sessions",
+      "handler": "create_session"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 94,
+      "receiver": "app",
+      "method": "DELETE",
+      "path": "/v1/sessions/{session_id}",
+      "handler": "delete_session"
+    },
+    {
+      "file": "apps/api/pao/main.py",
+      "line": 108,
+      "receiver": "app",
+      "method": "GET",
+      "path": "/v1/sessions/{session_id}",
+      "handler": "get_session"
+    },
+    {
+      "file": "apps/api/pao/memory_api.py",
+      "line": 54,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/sessions/{session_id}",
+      "handler": "toggle_memory"
+    },
+    {
+      "file": "apps/api/pao/skill_api.py",
+      "line": 142,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/skills",
+      "handler": "catalog"
+    },
+    {
+      "file": "apps/api/pao/skill_api.py",
+      "line": 95,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/skills/{skill_id}/analysis-preview",
+      "handler": "analysis_preview"
+    },
+    {
+      "file": "apps/api/pao/skill_api.py",
+      "line": 148,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/skills/{skill_id}/validate",
+      "handler": "preflight"
+    },
+    {
+      "file": "apps/api/pao/skill_api.py",
+      "line": 124,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/skills/daily-business-brief/preview",
+      "handler": "preview"
+    },
+    {
+      "file": "apps/api/pao/skill_api.py",
+      "line": 70,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/skills/investigate-ads-drop/attribution-preview",
+      "handler": "attribution_preview"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 562,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks",
+      "handler": "list_tasks"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 581,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/tasks",
+      "handler": "create_task"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 619,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}",
+      "handler": "get_task"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 624,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/tasks/{task_id}",
+      "handler": "update_task"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 867,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/activity",
+      "handler": "list_activity"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 703,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/attempts",
+      "handler": "list_attempts"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 710,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/tasks/{task_id}/attempts",
+      "handler": "create_attempt"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 771,
+      "receiver": "router",
+      "method": "PATCH",
+      "path": "/v1/tasks/{task_id}/attempts/{attempt_id}",
+      "handler": "update_attempt"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 830,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/attempts/{attempt_id}/skill-replay",
+      "handler": "attempt_skill_replay"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 849,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/comments",
+      "handler": "list_comments"
+    },
+    {
+      "file": "apps/api/pao/task_api.py",
+      "line": 855,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/tasks/{task_id}/comments",
+      "handler": "create_comment"
+    },
+    {
+      "file": "apps/api/pao/telegram.py",
+      "line": 297,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/telegram/status",
+      "handler": "status"
+    },
+    {
+      "file": "apps/api/pao/telegram.py",
+      "line": 271,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/telegram/webhook",
+      "handler": "webhook"
+    },
+    {
+      "file": "apps/api/pao/tool_api.py",
+      "line": 66,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/tools",
+      "handler": "registry"
+    },
+    {
+      "file": "apps/api/pao/tool_api.py",
+      "line": 88,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/tools/calls/{call_id}/decision",
+      "handler": "approval"
+    },
+    {
+      "file": "apps/api/pao/voice_api.py",
+      "line": 49,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/voice/speech",
+      "handler": "speech"
+    },
+    {
+      "file": "apps/api/pao/voice_api.py",
+      "line": 21,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/voice/status",
+      "handler": "status"
+    },
+    {
+      "file": "apps/api/pao/voice_api.py",
+      "line": 30,
+      "receiver": "router",
+      "method": "POST",
+      "path": "/v1/voice/transcriptions",
+      "handler": "transcribe"
+    },
+    {
+      "file": "apps/api/pao/warehouse_api.py",
+      "line": 116,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/warehouse/entities",
+      "handler": "entities"
+    },
+    {
+      "file": "apps/api/pao/warehouse_api.py",
+      "line": 102,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/warehouse/metrics",
+      "handler": "metrics"
+    },
+    {
+      "file": "apps/api/pao/warehouse_api.py",
+      "line": 126,
+      "receiver": "router",
+      "method": "GET",
+      "path": "/v1/warehouse/schedules",
+      "handler": "schedules"
+    },
+    {
+      "file": "apps/api/pao/warehouse_api.py",
+      "line": 133,
+      "receiver": "router",
+      "method": "PUT",
+      "path": "/v1/warehouse/schedules",
+      "handler": "schedule"
+    }
+  ],
+  "saved_openapi_routes": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "id": "health_health_get"
+    },
+    {
+      "method": "GET",
+      "path": "/ready",
+      "id": "ready_ready_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/actions",
+      "id": "propose_v1_ads_actions_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/actions",
+      "id": "actions_v1_ads_actions_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/actions/{action_id}",
+      "id": "get_action_v1_ads_actions__action_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/actions/{action_id}/execute",
+      "id": "execute_v1_ads_actions__action_id__execute_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/anomalies",
+      "id": "anomalies_v1_ads_anomalies_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/anomalies/{anomaly_id}/acknowledge",
+      "id": "acknowledge_v1_ads_anomalies__anomaly_id__acknowledge_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/autopilot/policies",
+      "id": "policies_v1_ads_autopilot_policies_get"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/ads/autopilot/policies",
+      "id": "put_policy_v1_ads_autopilot_policies_put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/autopilot/policies/{policy_id}",
+      "id": "get_policy_v1_ads_autopilot_policies__policy_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/autopilot/policies/{policy_id}/freeze",
+      "id": "freeze_v1_ads_autopilot_policies__policy_id__freeze_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/autopilot/policies/{policy_id}/unfreeze",
+      "id": "unfreeze_v1_ads_autopilot_policies__policy_id__unfreeze_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/autopilot/status",
+      "id": "runtime_status_v1_ads_autopilot_status_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/intelligence/analyze",
+      "id": "analyze_now_v1_ads_intelligence_analyze_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/recommendations",
+      "id": "recommendations_v1_ads_recommendations_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ads/recommendations/{recommendation_id}/dismiss",
+      "id": "dismiss_v1_ads_recommendations__recommendation_id__dismiss_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/rules",
+      "id": "rules_v1_ads_rules_get"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/ads/rules/{rule_id}",
+      "id": "set_rule_v1_ads_rules__rule_id__put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/targets",
+      "id": "targets_v1_ads_targets_get"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/ads/targets",
+      "id": "set_target_v1_ads_targets_put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ads/write-status",
+      "id": "write_status_v1_ads_write_status_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agents",
+      "id": "registry_v1_agents_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/approvals",
+      "id": "approvals_v1_approvals_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/approvals/{action_id}",
+      "id": "approval_detail_v1_approvals__action_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/approvals/{action_id}/approve",
+      "id": "approve_v1_approvals__action_id__approve_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/approvals/{action_id}/reject",
+      "id": "reject_v1_approvals__action_id__reject_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/alerts/{alert_id}/acknowledge",
+      "id": "acknowledge_v1_attribution_alerts__alert_id__acknowledge_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/analyze",
+      "id": "analyze_now_v1_attribution_analyze_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/attribution/dashboard",
+      "id": "dashboard_v1_attribution_dashboard_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/sources",
+      "id": "create_source_v1_attribution_sources_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/attribution/sources",
+      "id": "sources_v1_attribution_sources_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/analytics",
+      "id": "import_analytics_v1_attribution_sources__source_id__analytics_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/leads",
+      "id": "import_leads_v1_attribution_sources__source_id__leads_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/orders",
+      "id": "import_orders_v1_attribution_sources__source_id__orders_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/attribution/sources/{source_id}/stages",
+      "id": "import_stages_v1_attribution_sources__source_id__stages_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/token",
+      "id": "login_v1_auth_token_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/automation/status",
+      "id": "status_v1_automation_status_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/automation/workflows",
+      "id": "start_v1_automation_workflows_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/automation/workflows",
+      "id": "listing_v1_automation_workflows_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/automation/workflows/{workflow_id}",
+      "id": "get_v1_automation_workflows__workflow_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/automation/workflows/{workflow_id}/cancel",
+      "id": "cancel_v1_automation_workflows__workflow_id__cancel_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/automation/workflows/{workflow_id}/decision",
+      "id": "decision_v1_automation_workflows__workflow_id__decision_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/brands",
+      "id": "brands_v1_brands_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/brands",
+      "id": "create_brand_v1_brands_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/creatives/analyze",
+      "id": "analyze_now_v1_creatives_analyze_post"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/creatives/assets/{asset_id}/metadata",
+      "id": "update_metadata_v1_creatives_assets__asset_id__metadata_put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/creatives/dashboard",
+      "id": "dashboard_v1_creatives_dashboard_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/goals",
+      "id": "list_goals_v1_goals_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/goals",
+      "id": "create_goal_v1_goals_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/goals/{goal_id}",
+      "id": "get_goal_v1_goals__goal_id__get"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/goals/{goal_id}",
+      "id": "update_goal_v1_goals__goal_id__patch"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/accounts",
+      "id": "accounts_v1_integrations_google_ads_accounts_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/callback",
+      "id": "callback_v1_integrations_google_ads_callback_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/connection",
+      "id": "status_v1_integrations_google_ads_connection_get"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/integrations/google-ads/connection",
+      "id": "disconnect_v1_integrations_google_ads_connection_delete"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/jobs",
+      "id": "jobs_v1_integrations_google_ads_jobs_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/google-ads/metrics",
+      "id": "metrics_v1_integrations_google_ads_metrics_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/integrations/google-ads/oauth/start",
+      "id": "start_v1_integrations_google_ads_oauth_start_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/integrations/google-ads/sync",
+      "id": "sync_v1_integrations_google_ads_sync_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/meta/callback",
+      "id": "callback_v1_integrations_meta_callback_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/meta/connection",
+      "id": "status_v1_integrations_meta_connection_get"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/integrations/meta/connection",
+      "id": "disconnect_v1_integrations_meta_connection_delete"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/meta/jobs",
+      "id": "jobs_v1_integrations_meta_jobs_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/integrations/meta/oauth/start",
+      "id": "start_v1_integrations_meta_oauth_start_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/integrations/meta/snapshots",
+      "id": "snapshots_v1_integrations_meta_snapshots_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/integrations/meta/sync",
+      "id": "sync_v1_integrations_meta_sync_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/me",
+      "id": "me_v1_me_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/memory",
+      "id": "list_memory_v1_memory_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/memory",
+      "id": "create_memory_v1_memory_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/memory/search",
+      "id": "search_memory_v1_memory_search_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/memory/status",
+      "id": "memory_status_v1_memory_status_get"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/memory/{memory_id}",
+      "id": "edit_memory_v1_memory__memory_id__patch"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/memory/{memory_id}",
+      "id": "delete_memory_v1_memory__memory_id__delete"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/model-providers",
+      "id": "listing_v1_model_providers_get"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/model-providers/{provider}",
+      "id": "disconnect_v1_model_providers__provider__delete"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/connect",
+      "id": "connect_v1_model_providers__provider__connect_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/default",
+      "id": "set_default_v1_model_providers__provider__default_post"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/model-providers/{provider}/model",
+      "id": "set_model_v1_model_providers__provider__model_put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/model-providers/{provider}/models",
+      "id": "models_v1_model_providers__provider__models_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/model-providers/{provider}/test",
+      "id": "test_v1_model_providers__provider__test_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/platform/catalog",
+      "id": "catalog_v1_platform_catalog_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects",
+      "id": "list_projects_v1_projects_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects",
+      "id": "create_project_v1_projects_post"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/projects/{project_id}",
+      "id": "update_project_v1_projects__project_id__patch"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/reports",
+      "id": "create_v1_reports_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/reports",
+      "id": "reports_v1_reports_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/reports/configuration/schedules",
+      "id": "schedules_v1_reports_configuration_schedules_get"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/reports/configuration/schedules",
+      "id": "set_schedule_v1_reports_configuration_schedules_put"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/reports/dashboard",
+      "id": "dashboard_v1_reports_dashboard_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/reports/{report_id}",
+      "id": "get_report_v1_reports__report_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/reports/{report_id}/reconciliation-preview",
+      "id": "reconciliation_preview_v1_reports__report_id__reconciliation_preview_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/reports/{report_id}/telegram",
+      "id": "send_telegram_v1_reports__report_id__telegram_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/runs",
+      "id": "create_run_v1_runs_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs/{run_id}",
+      "id": "get_run_v1_runs__run_id__get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/runs/{run_id}/cancel",
+      "id": "cancel_v1_runs__run_id__cancel_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/events",
+      "id": "events_v1_runs__run_id__events_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/execution",
+      "id": "execution_v1_runs__run_id__execution_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/skill-replay",
+      "id": "skill_replay_v1_runs__run_id__skill_replay_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs/{run_id}/tools",
+      "id": "snapshot_v1_runs__run_id__tools_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/runs/{run_id}/tools",
+      "id": "create_v1_runs__run_id__tools_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/sessions",
+      "id": "create_session_v1_sessions_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/sessions",
+      "id": "list_sessions_v1_sessions_get"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/sessions/{session_id}",
+      "id": "delete_session_v1_sessions__session_id__delete"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/sessions/{session_id}",
+      "id": "get_session_v1_sessions__session_id__get"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/sessions/{session_id}",
+      "id": "toggle_memory_v1_sessions__session_id__patch"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/skills",
+      "id": "catalog_v1_skills_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/skills/daily-business-brief/preview",
+      "id": "preview_v1_skills_daily_business_brief_preview_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/skills/investigate-ads-drop/attribution-preview",
+      "id": "attribution_preview_v1_skills_investigate_ads_drop_attribution_preview_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/skills/{skill_id}/analysis-preview",
+      "id": "analysis_preview_v1_skills__skill_id__analysis_preview_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/skills/{skill_id}/validate",
+      "id": "preflight_v1_skills__skill_id__validate_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks",
+      "id": "list_tasks_v1_tasks_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/tasks",
+      "id": "create_task_v1_tasks_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}",
+      "id": "get_task_v1_tasks__task_id__get"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/tasks/{task_id}",
+      "id": "update_task_v1_tasks__task_id__patch"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/activity",
+      "id": "list_activity_v1_tasks__task_id__activity_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/attempts",
+      "id": "list_attempts_v1_tasks__task_id__attempts_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/tasks/{task_id}/attempts",
+      "id": "create_attempt_v1_tasks__task_id__attempts_post"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/tasks/{task_id}/attempts/{attempt_id}",
+      "id": "update_attempt_v1_tasks__task_id__attempts__attempt_id__patch"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/attempts/{attempt_id}/skill-replay",
+      "id": "attempt_skill_replay_v1_tasks__task_id__attempts__attempt_id__skill_replay_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tasks/{task_id}/comments",
+      "id": "list_comments_v1_tasks__task_id__comments_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/tasks/{task_id}/comments",
+      "id": "create_comment_v1_tasks__task_id__comments_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/telegram/status",
+      "id": "status_v1_telegram_status_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/telegram/webhook",
+      "id": "webhook_v1_telegram_webhook_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/tools",
+      "id": "registry_v1_tools_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/tools/calls/{call_id}/decision",
+      "id": "approval_v1_tools_calls__call_id__decision_post"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/voice/speech",
+      "id": "speech_v1_voice_speech_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/voice/status",
+      "id": "status_v1_voice_status_get"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/voice/transcriptions",
+      "id": "transcribe_v1_voice_transcriptions_post"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/warehouse/entities",
+      "id": "entities_v1_warehouse_entities_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/warehouse/metrics",
+      "id": "metrics_v1_warehouse_metrics_get"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/warehouse/schedules",
+      "id": "schedules_v1_warehouse_schedules_get"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/warehouse/schedules",
+      "id": "schedule_v1_warehouse_schedules_put"
+    }
+  ],
+  "tables": [
+    {
+      "class": "User",
+      "table": "users",
+      "line": 29
+    },
+    {
+      "class": "Workspace",
+      "table": "workspaces",
+      "line": 36
+    },
+    {
+      "class": "Member",
+      "table": "workspace_members",
+      "line": 41
+    },
+    {
+      "class": "ModelProviderConnection",
+      "table": "model_provider_connections",
+      "line": 49
+    },
+    {
+      "class": "ChatSession",
+      "table": "sessions",
+      "line": 71
+    },
+    {
+      "class": "Run",
+      "table": "runs",
+      "line": 83
+    },
+    {
+      "class": "Message",
+      "table": "messages",
+      "line": 106
+    },
+    {
+      "class": "RunEvent",
+      "table": "run_events",
+      "line": 121
+    },
+    {
+      "class": "AgentRun",
+      "table": "agent_runs",
+      "line": 132
+    },
+    {
+      "class": "Brand",
+      "table": "brands",
+      "line": 149
+    },
+    {
+      "class": "Memory",
+      "table": "memories",
+      "line": 156
+    },
+    {
+      "class": "MemoryJob",
+      "table": "memory_jobs",
+      "line": 183
+    },
+    {
+      "class": "ToolCall",
+      "table": "tool_calls",
+      "line": 198
+    },
+    {
+      "class": "ToolAudit",
+      "table": "tool_audits",
+      "line": 219
+    },
+    {
+      "class": "TelegramPeer",
+      "table": "telegram_peers",
+      "line": 230
+    },
+    {
+      "class": "TelegramUpdate",
+      "table": "telegram_updates",
+      "line": 240
+    },
+    {
+      "class": "TelegramDelivery",
+      "table": "telegram_deliveries",
+      "line": 248
+    },
+    {
+      "class": "MetaConnection",
+      "table": "meta_connections",
+      "line": 260
+    },
+    {
+      "class": "MetaOAuthState",
+      "table": "meta_oauth_states",
+      "line": 274
+    },
+    {
+      "class": "MetaSyncJob",
+      "table": "meta_sync_jobs",
+      "line": 284
+    },
+    {
+      "class": "MetaSnapshot",
+      "table": "meta_snapshots",
+      "line": 306
+    },
+    {
+      "class": "GoogleAdsConnection",
+      "table": "google_ads_connections",
+      "line": 315
+    },
+    {
+      "class": "GoogleAdsOAuthState",
+      "table": "google_ads_oauth_states",
+      "line": 327
+    },
+    {
+      "class": "GoogleAdsSyncJob",
+      "table": "google_ads_sync_jobs",
+      "line": 337
+    },
+    {
+      "class": "AdEntity",
+      "table": "ad_entities",
+      "line": 358
+    },
+    {
+      "class": "AdMetric",
+      "table": "ad_metrics",
+      "line": 383
+    },
+    {
+      "class": "AdSyncSchedule",
+      "table": "ad_sync_schedules",
+      "line": 431
+    },
+    {
+      "class": "AdReport",
+      "table": "ad_reports",
+      "line": 447
+    },
+    {
+      "class": "AdReportDelivery",
+      "table": "ad_report_deliveries",
+      "line": 481
+    },
+    {
+      "class": "AdReportSchedule",
+      "table": "ad_report_schedules",
+      "line": 489
+    },
+    {
+      "class": "AdTarget",
+      "table": "ad_targets",
+      "line": 506
+    },
+    {
+      "class": "AdRule",
+      "table": "ads_rules",
+      "line": 529
+    },
+    {
+      "class": "AdIntelligenceRun",
+      "table": "ad_intelligence_runs",
+      "line": 548
+    },
+    {
+      "class": "AdAnomaly",
+      "table": "ad_anomalies",
+      "line": 568
+    },
+    {
+      "class": "AdRecommendation",
+      "table": "ad_recommendations",
+      "line": 591
+    },
+    {
+      "class": "CreativeAsset",
+      "table": "creative_assets",
+      "line": 616
+    },
+    {
+      "class": "CreativeMetadata",
+      "table": "creative_metadata",
+      "line": 630
+    },
+    {
+      "class": "CreativeAnalysisRun",
+      "table": "creative_analysis_runs",
+      "line": 655
+    },
+    {
+      "class": "CreativePerformance",
+      "table": "creative_performance",
+      "line": 674
+    },
+    {
+      "class": "CreativeFeature",
+      "table": "creative_features",
+      "line": 699
+    },
+    {
+      "class": "CreativeLearning",
+      "table": "creative_learnings",
+      "line": 714
+    },
+    {
+      "class": "AttributionSource",
+      "table": "attribution_sources",
+      "line": 734
+    },
+    {
+      "class": "AnalyticsEvent",
+      "table": "analytics_events",
+      "line": 752
+    },
+    {
+      "class": "CrmLead",
+      "table": "crm_leads",
+      "line": 775
+    },
+    {
+      "class": "CrmStageEvent",
+      "table": "crm_stage_events",
+      "line": 797
+    },
+    {
+      "class": "BusinessOrder",
+      "table": "business_orders",
+      "line": 810
+    },
+    {
+      "class": "AttributionRun",
+      "table": "attribution_runs",
+      "line": 834
+    },
+    {
+      "class": "AttributionMetric",
+      "table": "attribution_metrics",
+      "line": 852
+    },
+    {
+      "class": "TrackingAlert",
+      "table": "tracking_alerts",
+      "line": 884
+    },
+    {
+      "class": "AdsAutopilotPolicy",
+      "table": "ads_autopilot_policies",
+      "line": 903
+    },
+    {
+      "class": "AdsPolicyAudit",
+      "table": "ads_policy_audits",
+      "line": 939
+    },
+    {
+      "class": "AdAction",
+      "table": "ads_actions",
+      "line": 949
+    },
+    {
+      "class": "AdActionAudit",
+      "table": "ads_action_audits",
+      "line": 998
+    },
+    {
+      "class": "AutomationWorkflow",
+      "table": "automation_workflows",
+      "line": 1008
+    },
+    {
+      "class": "AutomationOutbox",
+      "table": "automation_outbox",
+      "line": 1032
+    },
+    {
+      "class": "AutomationWorkflowAudit",
+      "table": "automation_workflow_audits",
+      "line": 1053
+    },
+    {
+      "class": "VoiceInteraction",
+      "table": "voice_interactions",
+      "line": 1063
+    },
+    {
+      "class": "Project",
+      "table": "projects",
+      "line": 1082
+    },
+    {
+      "class": "Goal",
+      "table": "goals",
+      "line": 1099
+    },
+    {
+      "class": "Task",
+      "table": "tasks",
+      "line": 1120
+    },
+    {
+      "class": "TaskDependency",
+      "table": "task_dependencies",
+      "line": 1165
+    },
+    {
+      "class": "TaskAttempt",
+      "table": "task_attempts",
+      "line": 1179
+    },
+    {
+      "class": "TaskComment",
+      "table": "task_comments",
+      "line": 1208
+    },
+    {
+      "class": "TaskActivity",
+      "table": "task_activity",
+      "line": 1217
+    }
+  ],
+  "potential_static_import_cycles": [],
+  "other_files": [
+    {
+      "file": "apps/api/migrations/versions/0001_foundation.py",
+      "sha256": "c314b1847e2de2c5f7005f1e33480b540961cf7e330a357ca2ae0ce2bef788c7"
+    },
+    {
+      "file": "apps/api/migrations/versions/0002_memory.py",
+      "sha256": "cdf78b1f66d55bc4ecca814cf26e999455901b361dbfc00379fbd4ab43363a27"
+    },
+    {
+      "file": "apps/api/migrations/versions/0003_agent_runtime.py",
+      "sha256": "591afec59504dbef1b0b72627077a4f89ab580e54af2a0c5bc9b3ea717ab193b"
+    },
+    {
+      "file": "apps/api/migrations/versions/0004_tool_gateway.py",
+      "sha256": "46931943a6a4f86cd2800f3b5d22d716543976f735c9a43072d120353a40f4e6"
+    },
+    {
+      "file": "apps/api/migrations/versions/0005_telegram.py",
+      "sha256": "3ac622fd7182f59d437296cf9432eff9dccae85d7e7206f8a7a61ad27e1bca2b"
+    },
+    {
+      "file": "apps/api/migrations/versions/0006_meta_read_only.py",
+      "sha256": "f5781a8201361936f278a800c2790d6cfdc4759b8e9d598cb8c5f2949448376d"
+    },
+    {
+      "file": "apps/api/migrations/versions/0007_ads_warehouse.py",
+      "sha256": "d105bac8c5efa179b3c5539893de455ec8f1b4c11dd23ab74ac1907f4666efa3"
+    },
+    {
+      "file": "apps/api/migrations/versions/0008_ads_reporting.py",
+      "sha256": "20be33405d429d46c24cd20ffbd39f7b9b2c3fadb05e4a1b6c9924555111515c"
+    },
+    {
+      "file": "apps/api/migrations/versions/0009_performance_intelligence.py",
+      "sha256": "0deebc94c385ff92659d10b83c34cb1b3ac5213472a518127659774803eaea17"
+    },
+    {
+      "file": "apps/api/migrations/versions/0010_meta_write.py",
+      "sha256": "086c83341b4936f7a9b60fece4265ead1602583acd4f40b105408d2289afd8c2"
+    },
+    {
+      "file": "apps/api/migrations/versions/0011_ads_approval.py",
+      "sha256": "2d9ac434c8101e1953e713e45aaa76a7541ac47369d91d46d8adfc5dff51b326"
+    },
+    {
+      "file": "apps/api/migrations/versions/0012_limited_autopilot.py",
+      "sha256": "7e27c21837d3cbcb537507a74071a25dc578b0fb17374fb38a8db7dfcd98070a"
+    },
+    {
+      "file": "apps/api/migrations/versions/0013_creative_intelligence.py",
+      "sha256": "aba1a13628017d90380d1a04e8c0eb8b2e2d92db25de3cf45d632f83399ef4aa"
+    },
+    {
+      "file": "apps/api/migrations/versions/0014_attribution_crm.py",
+      "sha256": "08a24418aad2632af692bfb7e9ca63dcd7d19c3828643a60ee60a31a413c67a0"
+    },
+    {
+      "file": "apps/api/migrations/versions/0015_google_ads.py",
+      "sha256": "4f2b5a89f2ff6956a94f9f42f3bfacbe2e2c6e83beb4f614fe52737bd1f28955"
+    },
+    {
+      "file": "apps/api/migrations/versions/0016_advanced_automation.py",
+      "sha256": "06f4196ee86ffcdb863b8f5ab30d823e60710e7c4a2721366e2e12cc66e12071"
+    },
+    {
+      "file": "apps/api/migrations/versions/0017_voice.py",
+      "sha256": "8bd4abe25db036bf05074e7d9bab87edb648309fe0d0899750964b74527bb5e9"
+    },
+    {
+      "file": "apps/api/migrations/versions/0018_tasks_projects.py",
+      "sha256": "50700577b9e2b9c647e5fa9a94b7ce663691350d471b1dafd5cfefbcf80d8aab"
+    },
+    {
+      "file": "apps/api/migrations/versions/0019_session_archive.py",
+      "sha256": "6dcbec7042823abdc0abe403e5809a870c91ce6c31db027cc14bdcf7a3253f94"
+    },
+    {
+      "file": "apps/api/migrations/versions/0020_cloud_model_router.py",
+      "sha256": "8a58ef9bb8526831757d4ee2facc10a86b72a748b1306b29f8db5439a15af8d4"
+    },
+    {
+      "file": "apps/api/migrations/versions/0021_automation_outbox.py",
+      "sha256": "bf11b6de4fa2e500b4564e8eaa69d21130d89530ec498d1987d757a71dace860"
+    },
+    {
+      "file": "apps/api/migrations/versions/0022_goals_task_execution.py",
+      "sha256": "41cd60655e72a934c7376098646e50ddff7f5998a24ad842043feb637bf34bd6"
+    },
+    {
+      "file": "apps/api/migrations/versions/0023_skill_snapshot.py",
+      "sha256": "f872b416a0a579a2cd49bd6255278505e3a0a3d2aa58d5d9d97771a88faaeb05"
+    },
+    {
+      "file": "apps/api/migrations/versions/0024_skill_artifact.py",
+      "sha256": "351627cae21ee7c829f642b2024b521b4671999b2300913657d7500aeafbb2c8"
+    },
+    {
+      "file": "apps/web/app/about/page.tsx",
+      "sha256": "3a18f75939143e75f97ef8d2beef0dd3c43c5380420299f7105d8cd819f78923"
+    },
+    {
+      "file": "apps/web/app/analytics/page.tsx",
+      "sha256": "ed355e17ba9fa564118b14037377b6da2e4bfa0a1aa936d441495d3c18b3622b"
+    },
+    {
+      "file": "apps/web/app/automation/page.tsx",
+      "sha256": "c777fa4d11114e2974f39236084db5e3663d3e83168df06ed1a5e2fdcfc832d5"
+    },
+    {
+      "file": "apps/web/app/content-creative/page.tsx",
+      "sha256": "21df2e04958ac345f2810904f797435d5f01ce8ab4060d1026518a1993340b7f"
+    },
+    {
+      "file": "apps/web/app/crm/page.tsx",
+      "sha256": "6502ff887d0f9f4816d3684ab240f35a430a367c57ee43c231f7f697c381f05a"
+    },
+    {
+      "file": "apps/web/app/dashboard/page.tsx",
+      "sha256": "fe30fc7add585b119b9fb8ab384bfc21494e9e182a4ae767474a3d2d234129e0"
+    },
+    {
+      "file": "apps/web/app/google-ads/page.tsx",
+      "sha256": "e034992be9ad2620c15ef757ba21200b5202f04f2d067ceee80cff01b58bd634"
+    },
+    {
+      "file": "apps/web/app/knowledge/page.tsx",
+      "sha256": "fbb1d0abdb85dd1eabf517ca8840f1820bf29c25ce2c643086aa71c6209d291a"
+    },
+    {
+      "file": "apps/web/app/meta-ads/page.tsx",
+      "sha256": "c5e1f5880e11f833fce7dad2ad70995c8fbbb0edfc6de9678100426315ac0cda"
+    },
+    {
+      "file": "apps/web/app/page.tsx",
+      "sha256": "f45501d9d325aec34b98b805cbe2df53f4b5936a1e111112d6cf0a6c430d3230"
+    },
+    {
+      "file": "apps/web/app/pao-ai/page.tsx",
+      "sha256": "55a2138c546f052c6a92d1c09417a01114cd7e095732c9b54bd2b66fa125e5cd"
+    },
+    {
+      "file": "apps/web/app/settings/page.tsx",
+      "sha256": "aa545c6462a5c0dc6f9c88980a82d61d64ad7f92390cf7f7f4604cac7246b924"
+    },
+    {
+      "file": "apps/web/app/skills/page.tsx",
+      "sha256": "f3ceb3ca937e1a79f9301a89c51067ae9163257f502bbc77b27af608e9e0f724"
+    },
+    {
+      "file": "apps/web/app/tasks/page.tsx",
+      "sha256": "9d16bfec9cc13d590f5689264d27a3637f9bbcbecb0375daab54d2d6f6eadfb7"
+    },
+    {
+      "file": "apps/web/app/tiktok-ads/page.tsx",
+      "sha256": "e878ab9f0af7be2089c952acf20e54d6ee6e9478d8f064c97d4aae00bdb7c2a5"
+    },
+    {
+      "file": "apps/web/next.config.mjs",
+      "sha256": "262db8e8c81c704c83d8bf07d60082c8200b46d3befe637eb532d37ce252747c"
+    },
+    {
+      "file": "infra/compose.acos-local.yaml",
+      "sha256": "2209b96e9526a6c80dfe0763c668b680c3b7855edd46b6d8e9361b6317af3a33"
+    },
+    {
+      "file": "packages/contracts/openapi.json",
+      "sha256": "3d5c132b00dd14d78c83c6e977837492f47ca597f5ffa92ebd6dfe8f85d2aaaa"
+    },
+    {
+      "file": "packages/contracts/schema.d.ts",
+      "sha256": "bebb42b64271660e98a61626bc681b7c90a67eb11be8ca43168407dddd65803d"
+    },
+    {
+      "file": "scripts/check_acos_idle.py",
+      "sha256": "0a124b8301e5aa1861f1ac2224f7344eb9f08a561fb31ccfe5018afc8d92a1bc",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/check_m2_restore.py",
+      "sha256": "126bf3621fe5d832a906b6649f2a2873b01f95f419db63c304987a917b3b6d5f",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/check_m2_test_migration.py",
+      "sha256": "595f53d7efd2af9663b41e91e5b59f3029f55d9b89eb982043fb951e4aa98958",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/check_m3_readiness.py",
+      "sha256": "5366da4295e50b5a4a79b4d4df87ffd4bf3bcda79cc8936605343176fb59be9c",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/configure_telegram_webhook.py",
+      "sha256": "b29af9502ae3a939e966b067cf90d680b472e63bf4580b42563ab3176b6a1c3b",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/deploy_local_phase10.ps1",
+      "sha256": "8dec62178ce632bbdfdcb036b0191cff304f1946f1484f799a9f432b619ea1d1",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase11.ps1",
+      "sha256": "ea014e3d1a244ed0e3c3efddb5f5397046dd75d8f97d1bc7fdf1443ca5e6987f",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase12.ps1",
+      "sha256": "fdfb5e4750100eaf9bccbcf4ac885850eb508cd26151f44bfcadcb78202da303",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase13.ps1",
+      "sha256": "3fc19a6c73fa084d3bd18e2868f0b48026e2593a95a4f35c7eb2135898799dbb",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase14.ps1",
+      "sha256": "62f97009444782f957154fa78fc539b0c58f896051483ce4d5767b7cabdff2b7",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase15.ps1",
+      "sha256": "7dd23aa3aa28c90a2a170796aa0057c1dbd252af2aadd532dbba1a5942940773",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase16.ps1",
+      "sha256": "506ad2da542c33b08edd10edc99299f898ad4f4d541adaed9bd5d185861c8a7a",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase17.ps1",
+      "sha256": "209068bd2d6d41f3e6a51f1eb3505bb075fea8576bd8957c13c420d2a9952505",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase18.ps1",
+      "sha256": "9cb152af2bd56c6a1f93b7109e95e2fc151baf9eff96c468387c10b29dc475d5",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase7.ps1",
+      "sha256": "50675c1b625e980e9e33eecaf1480c2b11bd510f2f502f58c8563a5aeccdeb0e",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase8.ps1",
+      "sha256": "2d700d6de2c19583bf21aef8dcb9e1e61e4dcf44671f7aeb02b8726c0216cdf7",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_local_phase9.ps1",
+      "sha256": "5c38f0b19f15ce6b4758bab4fc97761a3b7a209794915413c266b866b91cbc0d",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase10.py",
+      "sha256": "fa2650564dcc45cd60d854c64739451095fceb334aac86893e2ea4c0b2d1dd89",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase11.py",
+      "sha256": "1821728fed2885fd2d98d996b60541382bd4bb6bb1d6390369f16bb0fd5c5e28",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase12.py",
+      "sha256": "16c3fcb55b0cecd4861ff09ecae53f9575dd0b8c366ee0a3cd579d33190ebb55",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase13.py",
+      "sha256": "bb12844b9c2ca54cbcc63060722f5aa4b6c3cd2765eb40070a6b0a93cd0f737d",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase14.py",
+      "sha256": "b8cb2ec3a7c1f42eb6f37a11d0e65ae5fcf2d8fbb16c95cd1495fd982dd36db4",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase15.py",
+      "sha256": "6dc32651ed79cd46a390ab5b7fecb6f3d274f979292b7479cdb11343ff640023",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase16.py",
+      "sha256": "a3668538a4f3ac9910f5263a9a7605be55fcb97edc02f7a14bd3c8ac9731e0be",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase17.py",
+      "sha256": "431ad0d13033a48253e692cb8625c3c2a9620e72f5b3ecdc3b7ec9cf720537da",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase18.py",
+      "sha256": "93151f7d9b2a43a421e83f6ca22cf17f541d31781d3597db5ec8e195070ff49f",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase5.py",
+      "sha256": "9c16e64ffa6496ca6d5ceb003a5d33f2283cc40e6c01288cc5bcb9f64193be04",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase6.py",
+      "sha256": "ddf0dd2cbf17754e2cd2a5c46b72e2bbd1d8b8e9270a53cd622340bf69977547",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase7.py",
+      "sha256": "72c4c2a80429e5e9fad28f7d77916e2b886793f8ae67dfebe16e92f3da98dbf7",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase8.py",
+      "sha256": "35741e1cb2c9830b9559740d983c7a31e1f72972522a6ef17483d70823ef268e",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_phase9.py",
+      "sha256": "24a26154220b129445dcd5bc72b8cd486ea87aaa019d76478211d5e8131acdeb",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_stage2.py",
+      "sha256": "9f8913711c3001b5c008bba7ce38349306bfe7aedd88104777fa18484438043c",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/deploy_stage3.py",
+      "sha256": "89930bc5744ab81080798be2fa6482555f346bc72b19864d5fd9f5cd6d6ee1c3",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/export_openapi.py",
+      "sha256": "5c7337185a5b64b3c3be989cd7ee0c1896743c0b13d28d0d2dc87dcc7b1f9dd8",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/init_acos_local.py",
+      "sha256": "e96e43b4cb4036968859fafe2526a36731be267cc22f799e2001d78a7cd72bca",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/init_local.py",
+      "sha256": "a03a7be408fe77c988819360018de991b87eb44b887a05bed66f197d08e183b1",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/sapi_tts.ps1",
+      "sha256": "b64d8b51965c7a3a2d9e49b63f1eeae5b9912f29b3547ce64edba045dd1e1152",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_autopilot.py",
+      "sha256": "599c13cd90df7b3d5d541ba805b322a1be5ec1a4d373065f8b124df3b57966e5",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_meta.py",
+      "sha256": "18b14d6d071676dfeb4107e82d7a0fb72db9801a02b768265b8f1f7ace82915b",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_meta_write.py",
+      "sha256": "621fc348c5e95bd012329a8484146634ee74a6e75327c6d0991fff62ac8dab3f",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_search.py",
+      "sha256": "09361562f336c360dc1029e230ce4dceae9aaadd4fd70c3abe082a4baf497aa8",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_telegram.py",
+      "sha256": "2e769e6e86d0d975d776997e54c812f8c618712ece6f9c998e0600489a49cc2f",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_temporal.py",
+      "sha256": "7ada888ebcd41ad204dd9b83fa775919beed95837b7464001d3f7fabe8eed96b",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/setup_voice.py",
+      "sha256": "1a59f77b8cb4a405ef0e38bbe3eba0bd819cb9435ad3ed2beff843cbec7c8b9e",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/start_acos_local.ps1",
+      "sha256": "d23520933a6b90cf3d198e71d43ecd531046c705429eb4b607168ee66de1d7ff",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/start_local.ps1",
+      "sha256": "1c66f16d7f8960c06cc1129599e13d11d94803cfe2b4dc83ac35b569a8f02726",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/start_ollama.ps1",
+      "sha256": "2bd03f7b64778c6aaa6f161267425c40bc9b3ec935b85da2dafbd1168b7b2ce8",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/stop_acos_local.ps1",
+      "sha256": "a5a75394937f17d8b89c37a276b3814f2ce79b6477cf686bea8e77f33329620b",
+      "classification": "ACOS-current (read code; not executed in P0.1)"
+    },
+    {
+      "file": "scripts/telegram_bridge.py",
+      "sha256": "a41ec585fc4545ae44a71d366aab9312598400fa4493f096616972899ef63f19",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/telegram_identity.py",
+      "sha256": "d1b9344a6f1e0b96adc21f265ac2d69514e7a10016e857c773d89137803b4b7b",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/temporal_worker.py",
+      "sha256": "f3b28d4425e218b13781b2b70975c924694cf64d988bcfe706b41a9ea48e48ad",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/test_backend.py",
+      "sha256": "24901e7a8a943fd08ae6fdd3d5802fa15595abda3e7481c550ca9081906da70d",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/test_frontend_runtime.cjs",
+      "sha256": "ae239ec2f07274f0db5e22e43d014848e733edb2700e981f84005b7fcc25dfd6",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_agents_local.py",
+      "sha256": "c933afc38cac7ed25edaf559b40980bb7021c5fe02a60643ec59d32dabf0da12",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_chief_skill.cjs",
+      "sha256": "70a97e2afa41ab4408c87cb577666f33657e795b7c1f4f5c451fbf0a6e90ad7f",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_live_readonly.py",
+      "sha256": "4632eee8a23efefd2ec849c79cd361eea3460750ad20e8fa86c91d5da2fa36ff",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_memory_local.py",
+      "sha256": "c9d38a60c5f9f35ceaa460bb5daaa3dae947b0364b7d5bddc85224a99c10dfa3",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_phase10_deployment.py",
+      "sha256": "460628542bb6cb59224ed2236d45dac69f092dbb13b2c4a1afd4ca4cb8965305",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase11_deployment.py",
+      "sha256": "b61ccac0f77316e0595b0b83e96f0463fd0015430e97cf41c45dc09e8ad2a07c",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase12_deployment.py",
+      "sha256": "c238eb9e1c105299af799215c8e4f1a4e99c9c73e1873fd90f9debba9a88c4b5",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase13_deployment.py",
+      "sha256": "d3a2c06f0da48b50eabbb4393b777fdee770f6bd3bb92bb1c9fee72344cf3d01",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase14_deployment.py",
+      "sha256": "c219bd67102439fb6ec094b7b113024453f560c080e2e24f4c5756e71c0fdd27",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase15_deployment.py",
+      "sha256": "44ebefd7d30a6fb6aa3bd6043579384a4b72b24a253f30828b5043d258729259",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase16_deployment.py",
+      "sha256": "5640a9ab248e945b588f35ed650326597497210b90825029966daf6b30bdcea3",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase17_deployment.py",
+      "sha256": "62595f149dcb6b95414120fd368b9e488682b97e73400a79a567b04905799a2d",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_phase18_deployment.py",
+      "sha256": "b5c58ffdac9105c2dec06b1cbcf22228b657c8681a5df189423f92632c73437e",
+      "classification": "source-history (do not run against ACOS without review)"
+    },
+    {
+      "file": "scripts/verify_skills_ui.cjs",
+      "sha256": "a6f524090f09463958698a1900967788372c0cba48300ee06f71943e0f096e38",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_system_local.py",
+      "sha256": "04b0c51d24c75a5028c5087b21cbbd1e2de856078163a7a36c5e40db3a8c7f06",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_temporal_local.py",
+      "sha256": "ea6cae0b93d708d8f598011202eb1ab6e4a2135580cf2015c9f22d83a2e97986",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_tools_local.py",
+      "sha256": "9b8c5478d848b40023b8b00b74534ddb9bdc5a6077aacdbee76d19f6c58cd01d",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_voice_local.py",
+      "sha256": "259625a2f269fc63c03593128e6af98de8736a04dd9c9a37bae1b23ac1da6eb2",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    },
+    {
+      "file": "scripts/verify_workspace_ui.cjs",
+      "sha256": "ccf70561970d890383e072502fa26b1828c5089cbed9b621ad65c314d78a140f",
+      "classification": "shared-review (verify target/config and side effects before running)"
+    }
+  ]
+}

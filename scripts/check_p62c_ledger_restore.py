@@ -1,0 +1,63 @@
+"""After the isolated two-step ledger fixture: restore and hash-check all tables.
+
+No real Temporal/ARQ execution is asserted by this ledger-only checkpoint.
+"""
+import asyncio
+import json
+import sys
+from uuid import uuid4
+from sqlalchemy import text
+from sqlalchemy.engine import make_url
+from sqlalchemy.ext.asyncio import create_async_engine
+from pao.config import ROOT, settings
+from check_p11_migration import docker, snapshot, CONTAINER
+
+
+async def inspect(url):
+    engine = create_async_engine(url)
+    try:
+        async with engine.connect() as db:
+            assert await db.scalar(text('SELECT version_num FROM alembic_version')) == '0038'
+            assert await db.scalar(text("SELECT count(*) FROM studio_executions WHERE status='completed'")) == 1
+            assert await db.scalar(text("SELECT count(*) FROM task_attempts WHERE status='completed'")) == 2
+            assert await db.scalar(text("SELECT count(*) FROM studio_events WHERE action LIKE 'p62_step_%'")) == 6
+            assert await db.scalar(text("SELECT count(*) FROM tasks WHERE status='draft'")) == 2
+            if '--bridge' in sys.argv:
+                assert await db.scalar(text("SELECT count(*) FROM studio_commands WHERE status='delivered'")) == 3
+                assert await db.scalar(text("SELECT count(*) FROM studio_events WHERE action='p62_projection'")) == 7
+            for name in ('runs', 'llm_attempts', 'business_events'):
+                assert await db.scalar(text('SELECT count(*) FROM ' + name)) == 0
+    finally:
+        await engine.dispose()
+
+
+async def main():
+    url = make_url(settings().database_url)
+    assert url.database == 'pao_acos_local' and url.host == '127.0.0.1' and url.port == 15432
+    source = url.set(database='pao_test')
+    await inspect(source)
+    columns, before = await snapshot(source)
+    name = 'pao_p62c_restore_' + uuid4().hex
+    backup = ROOT / '.runtime' / ('p62c-ledger-' + uuid4().hex + '.dump')
+    created = False
+    with backup.open('xb') as file:
+        docker(CONTAINER, 'pg_dump', '-U', 'pao', '-d', 'pao_test', '-Fc', stdout=file)
+    try:
+        docker(CONTAINER, 'createdb', '-U', 'pao', name); created = True
+        with backup.open('rb') as file:
+            docker('-i', CONTAINER, 'pg_restore', '-U', 'pao', '-d', name,
+                   '--no-owner', '--exit-on-error', stdin=file)
+        target = url.set(database=name)
+        assert (await snapshot(target, columns))[1] == before
+        await inspect(target)
+        assert (await snapshot(source, columns))[1] == before
+        print(json.dumps({'pass': True, 'tables': len(columns), 'hash_exact': True,
+                          'step_events': 6, 'dry_run_attempts': 2, 'model_calls': 0,
+                          'bridge_commands_projections_verified': '--bridge' in sys.argv}))
+    finally:
+        if created:
+            docker(CONTAINER, 'dropdb', '-U', 'pao', name)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
